@@ -117,7 +117,8 @@ tokens = [
    'PARAMETERS',
    'SETS',
    'VARIABLES',
-   'SLASHES'
+   'SLASHES',
+   'INFINITY'
 ] + list(reserved.values())
 
 def t_STRING(t):
@@ -141,6 +142,10 @@ def t_SLASHES(t):
    r'//'
    return t
 
+def t_INFINITY(t):
+   r'\\infty'
+   t.value = Number("Infinity")
+   return t
 
 def t_COMMENT(t):
     r'\%[^\n]*'

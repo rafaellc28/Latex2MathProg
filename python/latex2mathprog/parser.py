@@ -34,7 +34,7 @@ from DeclarationExpression import *
 precedence = (
     ('left', 'ID'),
     ('left', 'COMMA', 'DOTS', 'FOR', 'WHERE'),
-    ('left', 'NUMBER'),
+    ('left', 'NUMBER', 'INFINITY'),
     ('left', 'OR', 'AND', 'NOT'),
     ('left', 'FORALL', 'EXISTS', 'NEXISTS'),
     ('right', 'LE', 'GE', 'LT', 'GT', 'EQ', 'NEQ', 'COLON', 'DEFAULT', 'DIMEN', 'SETOF'),
@@ -1305,7 +1305,8 @@ def p_NumericExpression(t):
                          | LPAREN NumericExpression RPAREN
                          | LPAREN Identifier RPAREN
                          | ConditionalNumericExpression
-                         | NUMBER'''
+                         | NUMBER
+                         | INFINITY'''
 
     if len(t) > 2 and isinstance(t[2], Identifier):
       t[2] = ValuedNumericExpression(t[2])
