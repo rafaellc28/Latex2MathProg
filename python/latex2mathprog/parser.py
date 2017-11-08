@@ -1447,15 +1447,11 @@ def p_FunctionNumericExpression(t):
         op = NumericExpressionWithFunction.STR2TIME
 
     if len(t) > 5:
-        if isinstance(t[3], NumericExpression) or isinstance(t[3], SymbolicExpression) or isinstance(t[3], Identifier):
-          t[3] = ValueList([t[3]])
-
         t[0] = NumericExpressionWithFunction(op, t[3], t[5])
-    elif len(t) > 4:
-        if isinstance(t[3], NumericExpression) or isinstance(t[3], SymbolicExpression) or isinstance(t[3], Identifier):
-          t[3] = ValueList([t[3]])
 
+    elif len(t) > 4:
         t[0] = NumericExpressionWithFunction(op, t[3])
+        
     else:
         if t[2] == "(":
           t[0] = NumericExpressionWithFunction(op)

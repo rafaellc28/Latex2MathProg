@@ -513,38 +513,33 @@ class CodeGenerator:
                     for dep in dependencies_vec:
                         if self._checkAddDependence(graph, name, dep):
                             graph[name].append(dep)
-
+                            
     # Auxiliary Methods
     def _generateGraph(self):
         
         graph = {}
-
+        
         self._generateGraphAux(graph, self.genSets)
         self._generateGraphAux(graph, self.genParameters)
-
+        
         return graph
-
+        
     # Get the MathProg code for a given relational expression
     def _getCodeValue(self, value):
         val = value.generateCode(self)
-        if val.replace('.','',1).isdigit():
-            val = str(int(float(val)))
-
         return val
-
+        
     # Get the MathProg code for a given sub-indice
     def _getCodeID(self, id_):
         if isinstance(id_, ValuedNumericExpression):
             if isinstance(id_.value, Identifier):
                 id_.value.setIsSubIndice(True)
-
+                
         elif isinstance(id_, Identifier):
             id_.setIsSubIndice(True)
-
+            
         val = id_.generateCode(self)
-        if val.replace('.','',1).isdigit():
-            val = str(int(float(val)))
-
+        
         return val
 
     # Get the MathProg code for a given entry
