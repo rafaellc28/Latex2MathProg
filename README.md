@@ -276,6 +276,16 @@ s.t. C1  : -Infinity, <= x, <= Infinity;
 | string concatenator   | `\&` | `"Hello, " \& 'wold!'` |
 
 
+## Reserved Words
+
+| | | | |
+|---------|--------|--------|-----------|
+| `card`  | `length` | `round` | `trunc` |
+| `substr` | `time2str` | `str2time` | `gmtime` |
+| `Irand224` | `Uniform01` | `Uniform` | `Normal01` |
+| `Normal` |  |  |  |
+
+
 ## Arithmetic Notation
 
 | Math      | Latex                         | Example      |
