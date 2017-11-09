@@ -1036,18 +1036,14 @@ def p_SetExpressionWithIndices(t):
     t[0] = SetExpressionWithIndices(t[1], t[3])
 
 def p_IteratedSetExpression(t):
-    '''SetExpression : SETOF LLBRACE IndexingExpression RRBRACE ValueList
-                     | SETOF LLBRACE IndexingExpression RRBRACE NumericExpression
+    '''SetExpression : SETOF LLBRACE IndexingExpression RRBRACE NumericExpression
                      | SETOF LLBRACE IndexingExpression RRBRACE Identifier
                      | SETOF LLBRACE IndexingExpression RRBRACE SymbolicExpression
-                     | SETOF LLBRACE IndexingExpression RRBRACE LPAREN ValueList RPAREN'''
+                     | SETOF LLBRACE IndexingExpression RRBRACE Tuple'''
     
     if t[5] == "(":
       t[0] = IteratedSetExpression(t[3], t[6])
     else:
-      if isinstance(t[5], NumericExpression) or isinstance(t[5], SymbolicExpression) or isinstance(t[5], Identifier):
-        t[5] = ValueList([t[5]])
-
       t[0] = IteratedSetExpression(t[3], [t[5]])
 
 def p_IndexingExpression(t):

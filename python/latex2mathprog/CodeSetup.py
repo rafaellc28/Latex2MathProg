@@ -2,6 +2,7 @@ from Tuple import *
 from ValueList import *
 from Identifier import *
 from SetExpression import *
+from EntryIndexingExpression import *
 from GenSet import *
 from GenVariable import *
 from GenParameter import *
@@ -620,8 +621,9 @@ class CodeSetup:
         Generate the MathProg code for entries in this indexing expression
         """
         if node.hasSup:
-            if len(node.entriesIndexingExpression) != 1:
-                raise CodeGenerationException('Statement '+str(self.stmtIndex+1)+': If iterated expression has a superior expression, then it must have a single entry in the inferior expression!')
+            if len(node.entriesIndexingExpression) != 1 or not isinstance(node.entriesIndexingExpression[0], EntryIndexingExpressionEq):
+                raise CodeGenerationException(self.stmtIndex+1, ", ".join(map(lambda el: el.getSymbolName(self.codeGenerator), node.entriesIndexingExpression)), 'Iterated expression (\sum, \prod, \max, \min, \cup or \cap) with a upper limit expression must have a single entry of the form "identifier = identifier2 | numeric expression" as the lower limit expression. Ex.: \sum_{i = 1}^{n}x_{i}')
+
             else:
                 node.entriesIndexingExpression[0].setHasSup(True)
                 node.entriesIndexingExpression[0].setSupExpression(node.supExpression)
