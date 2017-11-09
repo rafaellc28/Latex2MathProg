@@ -547,7 +547,7 @@ def p_DeclarationExpression(t):
         attr = DeclarationAttribute(t[3], DeclarationAttribute.GT)
       elif t[2] == "\\neq":
         attr = DeclarationAttribute(t[3], DeclarationAttribute.NEQ)
-        
+
       if isinstance(t[1], NumericExpression) or isinstance(t[1], SymbolicExpression) or isinstance(t[1], Identifier):
         t[1] = ValueList([t[1]])
 
@@ -600,12 +600,16 @@ def p_DeclarationAttribute(t):
                           | NEQ NumericExpression
                           | NEQ Identifier
                           | NEQ SymbolicExpression'''
-  if isinstance(t[2], Identifier):
-    t[2] = SetExpressionWithValue(t[2])    
 
   if t[1] == "\\in":
+    if isinstance(t[2], Identifier):
+      t[2] = SetExpressionWithValue(t[2])    
+
     t[0] = DeclarationAttribute(t[2], DeclarationAttribute.IN)
   elif re.search(r"\\subseteq|\\subset", t[1]):
+    if isinstance(t[2], Identifier):
+      t[2] = SetExpressionWithValue(t[2])    
+
     t[0] = DeclarationAttribute(t[2], DeclarationAttribute.WT)
   elif re.search(r"\\text\{\s*default\s*\}", t[1]):
     t[0] = DeclarationAttribute(t[2], DeclarationAttribute.DF)
