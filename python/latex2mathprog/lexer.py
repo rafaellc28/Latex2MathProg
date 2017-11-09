@@ -46,6 +46,8 @@ tokens = [
    'REALSETWITHONELIMIT',
    'REALSETWITHTWOLIMITS',
    'NATURALSET',
+   'NATURALSETWITHONELIMIT',
+   'NATURALSETWITHTWOLIMITS',
    'DEFAULT',
    'SETOF',
    'DIMEN',
@@ -248,8 +250,8 @@ def t_BINARYSET(t):
    return t
 
 def t_INTEGERSETWITHTWOLIMITS(t):
-   r'\\mathbb{Z}[_\^]{([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
-   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
+   r'\\mathbb{Z}[_\^]{([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
+   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
 
    domain = ""
    if m:
@@ -259,7 +261,7 @@ def t_INTEGERSETWITHTWOLIMITS(t):
       elif groups[0] == "\\leq":
          domain += " , <="
       else:
-         domain += " , " + groups[0]+"="
+         domain += " , " + groups[0]
 
       domain += " " + groups[1]
 
@@ -271,7 +273,7 @@ def t_INTEGERSETWITHTWOLIMITS(t):
       elif groups[3] == "\\leq":
          domain += ", <="
       else:
-         domain += ", " + groups[3]+"="
+         domain += ", " + groups[3]
       
       domain += " " + groups[4]
 
@@ -283,8 +285,8 @@ def t_INTEGERSETWITHTWOLIMITS(t):
    return t
 
 def t_INTEGERSETWITHONELIMIT(t):
-   r'\\mathbb{Z}[_\^]{([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
-   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
+   r'\\mathbb{Z}[_\^]{([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
+   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
 
    domain = ""
    if m:
@@ -294,7 +296,7 @@ def t_INTEGERSETWITHONELIMIT(t):
       elif groups[0] == "\\leq":
          domain += " <="
       else:
-         domain += " " + groups[0]+"="
+         domain += " " + groups[0]
 
       domain += " " + groups[1]
 
@@ -321,8 +323,8 @@ def t_INTEGERSET(t):
    return t
 
 def t_REALSETWITHTWOLIMITS(t):
-   r'\\mathbb{R}[_\^]{([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
-   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
+   r'\\mathbb{R}[_\^]{([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
+   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
 
    domain = ""
    if m:
@@ -332,7 +334,7 @@ def t_REALSETWITHTWOLIMITS(t):
       elif groups[0] == "\\leq":
          domain += " , <="
       else:
-         domain += " , " + groups[0]+"="
+         domain += " , " + groups[0]
 
       domain += " " + groups[1]
 
@@ -344,7 +346,7 @@ def t_REALSETWITHTWOLIMITS(t):
       elif groups[3] == "\\leq":
          domain += ", <="
       else:
-         domain += ", " + groups[3]+"="
+         domain += ", " + groups[3]
       
       domain += " " + groups[4]
 
@@ -356,8 +358,8 @@ def t_REALSETWITHTWOLIMITS(t):
    return t
 
 def t_REALSETWITHONELIMIT(t):
-   r'\\mathbb{R}[_\^]{([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
-   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
+   r'\\mathbb{R}[_\^]{([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
+   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
 
    domain = ""
    if m:
@@ -367,7 +369,7 @@ def t_REALSETWITHONELIMIT(t):
       elif groups[0] == "\\leq":
          domain += " <="
       else:
-         domain += " " + groups[0]+"="
+         domain += " " + groups[0]
 
       domain += " " + groups[1]
 
@@ -393,8 +395,8 @@ def t_REALSET(t):
    return t
 
 def t_NATURALSETWITHTWOLIMITS(t):
-   r'\\mathbb{N}[_\^]{([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
-   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
+   r'\\mathbb{N}[_\^]{([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
+   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?\s*,\s*([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
    
    domain = ""
    if m:
@@ -404,7 +406,7 @@ def t_NATURALSETWITHTWOLIMITS(t):
       elif groups[0] == "\\leq":
          domain += " , <="
       else:
-         domain += " , " + groups[0]+"="
+         domain += " , " + groups[0]
 
       limit = float(groups[1])
       if limit < 0:
@@ -421,7 +423,7 @@ def t_NATURALSETWITHTWOLIMITS(t):
       elif groups[3] == "\\leq":
          domain += ", <="
       else:
-         domain += ", " + groups[3]+"="
+         domain += ", " + groups[3]
       
       limit = float(groups[4])
       if limit < 0:
@@ -433,13 +435,13 @@ def t_NATURALSETWITHTWOLIMITS(t):
          if groups[5] != None and groups[5] != 0:
             domain += groups[5]
 
-   t.value2 = "realset" + domain
+   t.value2 = "integer" + domain
 
    return t
 
 def t_NATURALSETWITHONELIMIT(t):
-   r'\\mathbb{N}[_\^]{([><]|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
-   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
+   r'\\mathbb{N}[_\^]{([><]|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}'
+   m = re.search(r"[_\^]{(>|<|\\geq|\\leq)\s*([-+]?[0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?}", t.value)
 
    domain = ""
    if m:
@@ -449,7 +451,7 @@ def t_NATURALSETWITHONELIMIT(t):
       elif groups[0] == "\\leq":
          domain += " <="
       else:
-         domain += " " + groups[0]+"="
+         domain += " " + groups[0]
 
       limit = float(groups[1])
       if limit < 0:
@@ -461,7 +463,7 @@ def t_NATURALSETWITHONELIMIT(t):
          if groups[2] != None and groups[2] != 0:
             domain += groups[2]
 
-   t.value2 = "realset" + domain
+   t.value2 = "integer" + domain
    return t
 
 def t_NATURALSET(t):
@@ -658,7 +660,7 @@ def t_ID(t):
 
 # A regular expression rule with some action code
 def t_NUMBER(t):
-   r'[0-9]*\.?[0-9]+([dDeE][-+]?[0-9]+)?'
+   r'[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?'
    t.value = Number(t.value)
    return t
 

@@ -706,14 +706,15 @@ class CodeGenerator:
             if relations != None and len(relations) > 0:
                 paramStr += ", " + ",".join(map(lambda el: el.op + " " + el.attribute.generateCode(self), relations))
 
-            if varDecl.getDefault() != None:
-                default = ", default " + varDecl.getDefault().attribute.generateCode(self)
-                paramStr += default
-
             if varDecl.getValue() != None:
                 value = ", := " + varDecl.getValue().attribute.generateCode(self)
                 paramStr += value
                 self.genValueAssigned.add(GenObj(param))
+
+            elif varDecl.getDefault() != None:
+                default = ", default " + varDecl.getDefault().attribute.generateCode(self)
+                paramStr += default
+
 
         paramStr += ";\n\n"
 
@@ -758,14 +759,14 @@ class CodeGenerator:
                 if ins != "":
                     setStr += ", " + ins
 
-            if varDecl.getDefault() != None:
-                default = ", default " + varDecl.getDefault().attribute.generateCode(self)
-                setStr += default
-
             if varDecl.getValue() != None:
                 value = ", := " + varDecl.getValue().attribute.generateCode(self)
                 setStr += value
                 self.genValueAssigned.add(GenObj(_genSet.getName()))
+
+            elif varDecl.getDefault() != None:
+                default = ", default " + varDecl.getDefault().attribute.generateCode(self)
+                setStr += default
 
         setStr += ";\n\n"
 

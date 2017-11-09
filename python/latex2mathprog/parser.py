@@ -50,8 +50,9 @@ precedence = (
     ('right', 'CARET'),
     ('right', 'UPLUS', 'UMINUS'),
     ('right', 'AMPERSAND'),
-    ('left', 'INTEGERSET', 'INTEGERSETPOSITIVE', 'INTEGERSETNEGATIVE', 'INTEGERSETWITHONELIMIT', 
-      'REALSET', 'REALSETPOSITIVE', 'REALSETNEGATIVE', 'REALSETWITHONELIMIT', 'NATURALSET', 'BINARYSET', 'SYMBOLIC', 'LOGICAL')
+    ('left', 'INTEGERSET', 'INTEGERSETPOSITIVE', 'INTEGERSETNEGATIVE', 'INTEGERSETWITHONELIMIT', 'INTEGERSETWITHTWOLIMITS', 
+      'REALSET', 'REALSETPOSITIVE', 'REALSETNEGATIVE', 'REALSETWITHONELIMIT', 'REALSETWITHTWOLIMITS', 
+      'NATURALSET', 'NATURALSETWITHONELIMIT', 'NATURALSETWITHTWOLIMITS', 'BINARYSET', 'SYMBOLIC', 'LOGICAL')
 )
 
 def p_Main(t):
@@ -542,15 +543,11 @@ def p_DeclarationExpression(t):
         attr = DeclarationAttribute(t[4], DeclarationAttribute.ST)
       elif t[2] == "<":
         attr = DeclarationAttribute(t[3], DeclarationAttribute.LT)
-      elif t[2] == "\\leq":
-        attr = DeclarationAttribute(t[3], DeclarationAttribute.LE)
       elif t[2] == ">":
         attr = DeclarationAttribute(t[3], DeclarationAttribute.GT)
-      elif t[2] == "\\geq":
-        attr = DeclarationAttribute(t[3], DeclarationAttribute.GE)
       elif t[2] == "\\neq":
         attr = DeclarationAttribute(t[3], DeclarationAttribute.NEQ)
-
+        
       if isinstance(t[1], NumericExpression) or isinstance(t[1], SymbolicExpression) or isinstance(t[1], Identifier):
         t[1] = ValueList([t[1]])
 
@@ -626,6 +623,8 @@ def p_DeclarationAttribute(t):
     t[0] = DeclarationAttribute(t[2], DeclarationAttribute.GE)
   elif t[1] == "\\neq":
     t[0] = DeclarationAttribute(t[2], DeclarationAttribute.NEQ)
+  elif t[1] == "=":
+    t[0] = DeclarationAttribute(t[2], DeclarationAttribute.EQ)
 
 def p_LinearExpression(t):
     '''LinearExpression : LPAREN LinearExpression RPAREN
@@ -979,6 +978,8 @@ def p_SetExpressionWithValue(t):
                      | LPAREN Range RPAREN
                      | EMPTYSET
                      | NATURALSET
+                     | NATURALSETWITHONELIMIT
+                     | NATURALSETWITHTWOLIMITS
                      | INTEGERSET
                      | INTEGERSETPOSITIVE
                      | INTEGERSETNEGATIVE
