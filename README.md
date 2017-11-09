@@ -238,22 +238,35 @@ If `L` was not of the type `param logical`, the second line in the MathProg code
 
 ## Identifiers
 
-An identifier is a sequence of characters in `a-z`, `A-Z` or `0-9`. It must start with characters in `a-z` or `A-Z`, and can have size one or more.
+An identifier is formed by characters in `a-z`, `A-Z` or `0-9` and optional `\_` (one or more, in any position). It can start with `\_` or characters in `a-z` or `A-Z`, and can have size one or more. If the identifier starts with one or more `\_`, then at least one character in `a-z` or `A-Z` must follow the initial sequence of `\_`.
 
 Example:
 
 ```latex
-id1 := "test"
+\_id1 := "test"
 ```
 is converted to
 
 ```ampl
-param id1, := "test";
+param _id1, := "test";
 ```
+
+Note that `_` alone is not allowed in an identifier, because `_` is used in LaTeX to format text. Therefore, if you need an identifier with underline(s) you must write each one as `\_`.
+
 
 ## Numbers
 
-Numbers can be expressed using `.` as the decimal point. It is also possible to use `E`, `e`, `+` or `-` to the exponential part, like in `123.5E-10`. Furthermore, numbers can start with `+` or `-`, like in `-67.3`.
+Numbers can be expressed using `.` as the decimal point. It is also possible to use `E`, `e`, `+` or `-` to the exponential part, like in `123.5E-10`. Furthermore, numbers can start with `+` or `-`, like in `-67.3`. The symbol for infinity `\infty` is recognized as a number and can appear in any place where a number can appear. For instance:
+
+```latex
+-\infty \leq x \leq \infty
+```
+
+is converted to
+
+```ampl
+s.t. C1  : -Infinity, <= x, <= Infinity;
+```
 
 ## Strings
 
@@ -433,11 +446,11 @@ For the statements and expressions below, we have that
 
 ## Objective Statement
 
-`\text{maximize}` \<LinearExpression\> [`SEPARATOR` \<IndexingExpression\> ]
+`\text{maximize}` \<LinearExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`//`]
 
 or
 
-`\text{minimize}` \<LinearExpression\> [`SEPARATOR` \<IndexingExpression\> ]
+`\text{minimize}` \<LinearExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`//`]
 
 A Linear Program can have more than one objective.
 
@@ -449,12 +462,12 @@ A Linear Program can have more than one objective.
 
 ## Constraint Statement
 
-\<ConstraintExpression\> [`SEPARATOR` \<IndexingExpression\> ]
+\<ConstraintExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`//`]
 
 
 ## Declaration Statement
 
-\<DeclarationExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`;` Declaration]
+\<DeclarationExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`;` Declaration] [`//`]
 
 
 ## Conditional Statement
@@ -514,7 +527,39 @@ or
 | dimen | `dimen`  | `A dimen 2` |
 
 
-### Note
+### Note 1
+
+Optionally, you can use `//` to separate objectives, constraints and declarations. It is useful, for instance, when you have the following sequence of constraints
+
+```latex
+-1.5 \leq x_{1} \leq 4\\
+-3 \leq x_{2} \leq 3\\
+```
+
+<b>latex2mathprog</b> gives a syntax error for this sequence, because it tries to parse this as
+
+```latex
+-1.5 \leq x_{1} \leq 4 -3 \leq x_{2} \leq 3\\
+```
+
+which is an invalid syntax in MathProg.
+
+To solve this problem, use `//` to separate the constraints, making it clear that they are two different constraints. Thus,
+
+```latex
+-1.5 \leq x_{1} \leq 4//\\
+-3 \leq x_{2} \leq 3\\
+```
+
+is correctly converted to
+
+```ampl
+s.t. C1  : -1.5, <= x[1], <= 4;
+s.t. C2  : -3, <= x[2], <= 3;
+```
+
+
+### Note 2
 
 \<Identifier\> `\leq` \<Expression\>
 
