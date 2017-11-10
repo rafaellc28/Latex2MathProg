@@ -341,8 +341,8 @@ s.t. C1  : -Infinity, <= x, <= Infinity;
 | is member of | `\in` | `a \in \mathbb{B}` |
 | is not member of | `\notin` | `a \notin \mathbb{B}` |
 | is (proper) subset of | `\subset` or `\subseteq` | `A \subseteq B` |
-| union | `\cup`  | `A \cup B` |
-| intersection | `\cap`  | `A \cap B` |
+| union | `\cup` or `\bigcup`  | `A \cup B` |
+| intersection | `\cap` or `\bigcap`  | `A \cap B` |
 | Cartesian product | `\cross`  | `A \cross B` |
 | difference | `\setminus`  | `A \setminus B` |
 | symetric difference | `\triangle`, `\ominus` or `\oplus`  | `A \oplus B` |
