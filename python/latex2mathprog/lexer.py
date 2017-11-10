@@ -642,11 +642,11 @@ def t_SYMDIFF(t):
    return t
 
 def t_UNION(t):
-   r'\\cup'
+   r'\\cup|\\bigcup'
    return t
 
 def t_INTER(t):
-   r'\\cap'
+   r'\\cap|\\bigcap'
    return t
 
 def t_CROSS(t):

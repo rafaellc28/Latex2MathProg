@@ -992,22 +992,20 @@ class CodeSetup:
         """
         Generate the MathProg code for the identifiers and sets used in this set expression
         """
+        
         previousLevel = self.level
         previousTable = self.currentTable
         
         self.level += 1
         self.currentTable.setIsLeaf(False)
         self.currentTable = self.codeGenerator.symbolTables.insert(self.stmtIndex, SymbolTable(self.stmtIndex, self.currentTable, True), self.level)
-
+        
         node.indexingExpression.setupEnvironment(self)
-
-        if node.integrands != None and len(node.integrands) > 0:
-            map(self._setupEntry, node.integrands)
-
+        node.integrand.setupEnvironment(self)
+        
         self.level = previousLevel
         self.currentTable = previousTable
-
-
+        
     def setupEnvironment_ConditionalSetExpression(self, node):
         """
         Generate the MathProg code for the identifiers and sets used in this set expression

@@ -953,9 +953,9 @@ def p_SetExpressionWithOperation(t):
         op = SetExpressionWithOperation.DIFF
     elif re.search(r"\\triangle|\\ominus", t[2]):
         op = SetExpressionWithOperation.SYMDIFF
-    elif re.search(r"\\cup", t[2]):
+    elif re.search(r"\\cup|\\bigcup", t[2]):
         op = SetExpressionWithOperation.UNION
-    elif re.search(r"\\cap", t[2]):
+    elif re.search(r"\\cap|\\bigcap", t[2]):
         op = SetExpressionWithOperation.INTER
     elif re.search(r"\\times", t[2]):
         op = SetExpressionWithOperation.CROSS
@@ -1046,10 +1046,7 @@ def p_IteratedSetExpression(t):
                      | SETOF LLBRACE IndexingExpression RRBRACE SymbolicExpression
                      | SETOF LLBRACE IndexingExpression RRBRACE Tuple'''
     
-    if t[5] == "(":
-      t[0] = IteratedSetExpression(t[3], t[6])
-    else:
-      t[0] = IteratedSetExpression(t[3], [t[5]])
+    t[0] = IteratedSetExpression(t[3], t[5])
 
 def p_IndexingExpression(t):
     '''IndexingExpression : EntryIndexingExpression

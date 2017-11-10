@@ -1175,15 +1175,8 @@ class CodeGenerator:
         return "(" + node.setExpression.generateCode(self) + ")"
 
     def generateCode_IteratedSetExpression(self, node):
-        integrands = ""
-        if node.integrands != None:
-            if len(node.integrands) == 1:
-                integrands += node.integrands[0].generateCode(self)
-            else:
-                integrands += "(" + ",".join(map(lambda el: el.generateCode(self), node.integrands)) + ")"
-
-        return "setof {" + node.indexingExpression.generateCode(self) + "} " + integrands
-
+        return "setof {" + node.indexingExpression.generateCode(self) + "} " + node.integrand.generateCode(self)
+        
     def generateCode_ConditionalSetExpression(self, node):
         res = "if " + node.logicalExpression.generateCode(self) + " then " + node.setExpression1.generateCode(self)
 
