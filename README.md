@@ -360,7 +360,7 @@ s.t. C1  : -Infinity, <= x, <= Infinity;
 | trunc       | `trunc`    | `trunc(2.567)` and `trunc(2.567,2)` |
 | sine        | `\sin` | `\sin(2.567)` |
 | cosine      | `\cos` | `\cos(2.567)` |
-| arctangent  | `\arctan` | `\arctan(a)` and `\arctan(y,x)` |
+| arctangent  | `\arctan` or `\tan^{-1}` | `\arctan(a)` and `\arctan(y,x)` |
 | natural logarithm    | `\ln` | `\ln(a)` |
 | decimal logarithm    | `\log` | `\log(a)` |
 | base-e exponential   | `\exp` | `\exp(a)` |
