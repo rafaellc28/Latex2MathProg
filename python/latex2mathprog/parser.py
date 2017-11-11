@@ -45,6 +45,7 @@ precedence = (
     ('right', 'LPAREN', 'RPAREN'),
     ('right', 'IN', 'NOTIN', 'SUBSET', 'NOTSUBSET'),
     ('right', 'LBRACE', 'RBRACE', 'LLBRACE', 'RRBRACE', 'LBRACKET', 'RBRACKET'),
+    ('left', 'MAXIMIZE', 'MINIMIZE'),
     ('right', 'PLUS', 'MINUS'),
     ('right', 'TIMES', 'DIVIDE', 'MOD', 'QUOTIENT', 'LESS'),
     ('right', 'CARET'),
@@ -56,42 +57,12 @@ precedence = (
 )
 
 def p_Main(t):
-  '''MAIN : LinearProgram 
-          | LinearEquations'''
+  '''MAIN : LinearEquations'''
   t[0] = Main(t[1])
 
 def p_LinearEquations(t):
     '''LinearEquations : ConstraintList'''
     t[0] = LinearEquations(Constraints(t[1]))
-
-def p_LinearProgram(t):
-    '''LinearProgram : Objectives
-                     | Objectives Constraints'''
-
-    if isinstance(t[1], LinearProgram):
-      t[1].setDeclarations(t[2])
-      t[0] = t[1]
-
-    else:
-      if len(t) > 3:
-          t[0] = LinearProgram(t[1], t[3])
-      elif len(t) > 2:
-          t[0] = LinearProgram(t[1], t[2])
-      else:
-          t[0] = LinearProgram(t[1], None)
-
-def p_Objectives(t):
-    '''Objectives : Objectives Objective SLASHES
-                  | Objectives Objective
-                  | Objective SLASHES
-                  | Objective'''
-
-    if not isinstance(t[1], Objectives):
-        t[0] = Objectives([t[1]])
-    elif len(t) > 2:
-        t[0] = t[1].addObjective(t[2])
-    else:
-        t[0] = t[1]
 
 def p_Objective(t):
     '''Objective : MAXIMIZE LinearExpression
@@ -141,19 +112,19 @@ def p_Objective(t):
         else:
             t[0] = Objective(t[2], Objective.MAXIMIZE)
 
-def p_Constraints(t):
-    '''Constraints : SUBJECTTO ConstraintList'''
-    t[0] = Constraints(t[2])
-
 def p_ConstraintList(t):
-    '''ConstraintList : ConstraintList Constraint SLASHES
+    '''ConstraintList : ConstraintList Objective SLASHES
+                      | ConstraintList Constraint SLASHES
                       | ConstraintList Declarations SLASHES
+                      | ConstraintList Objective
                       | ConstraintList Constraint
                       | ConstraintList Declarations
-                      | Declarations SLASHES
+                      | Objective SLASHES
                       | Constraint SLASHES
-                      | Declarations
-                      | Constraint'''
+                      | Declarations SLASHES
+                      | Objective
+                      | Constraint
+                      | Declarations'''
     if len(t) > 2 and not isinstance(t[2], str):
       if isinstance(t[2], Declarations):
         t[0] = t[1] + t[2].declarations

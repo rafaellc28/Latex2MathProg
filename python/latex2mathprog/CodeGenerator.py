@@ -1,6 +1,7 @@
 from Utils import *
 from ValueList import *
 from Tuple import *
+from Objectives import *
 from Constraints import *
 from SetExpression import *
 from EntryIndexingExpression import *
@@ -174,6 +175,10 @@ class CodeGenerator:
 
         return None, [], [], []
 
+    def _domainIsParamSetOrVar(self, domain):
+        name = domain.getName()
+        return name in [Constants.VARIABLES, Constants.PARAMETERS, Constants.SETS]
+
     def _getItemDomain(self, domains, totalIndices):
         size = len(domains)
         if size == 0:
@@ -182,6 +187,10 @@ class CodeGenerator:
         while size > 0:
             size -= 1
             domain = domains[size]
+
+            if self._domainIsParamSetOrVar(domain):
+                continue
+
             dependencies = list(domain.getDependencies())
 
             if domain.getName() in dependencies:
@@ -560,6 +569,8 @@ class CodeGenerator:
         if isinstance(constraint, Constraint):
             self.constraintNumber += 1
             return "s.t. C" + str(self.constraintNumber) + " " + constraint.generateCode(self)
+        elif isinstance(constraint, Objective):
+            return self._getCodeObjective(constraint)
 
         return ""
 
@@ -911,7 +922,7 @@ class CodeGenerator:
             if idxExpression:
                 domain_str = " {" + idxExpression + "}"
 
-        return node.type + " obj" + (str(self.objectiveNumber) if self.totalObjectives > 1 else "")  + domain_str + ": " + node.linearExpression.generateCode(self) + ";"
+        return node.type + " obj" + (str(self.objectiveNumber) if self.objectiveNumber > 1 else "")  + domain_str + ": " + node.linearExpression.generateCode(self) + ";"
 
     # Constraints
     def generateCode_Constraints(self, node):
@@ -1176,7 +1187,7 @@ class CodeGenerator:
 
     def generateCode_IteratedSetExpression(self, node):
         return "setof {" + node.indexingExpression.generateCode(self) + "} " + node.integrand.generateCode(self)
-        
+
     def generateCode_ConditionalSetExpression(self, node):
         res = "if " + node.logicalExpression.generateCode(self) + " then " + node.setExpression1.generateCode(self)
 

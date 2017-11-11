@@ -64,7 +64,6 @@ tokens = [
    'LESS',
    'MAXIMIZE',
    'MINIMIZE',
-   'SUBJECTTO',
    'LPAREN',
    'RPAREN',
    'LBRACE',
@@ -501,9 +500,9 @@ def t_MINIMIZE(t):
    r'\\text\{\s*minimize\s*\}|minimize|\\text\{\s*minimize:\s*\}|minimize:'
    return t
 
-def t_SUBJECTTO(t):
+def t_ignore_SUBJECTTO(t):
    r'\\text\{\s*subject\sto\s*\}|\\text\{\s*subj\.to\s*\}|\\text\{\s*s\.t\.\s*\}|subject\sto\s*|subj\.to\s*|s\.t\.\s*|\\text\{\s*subject\sto:\s*\}|\\text\{\s*subj\.to:\s*\}|\\text\{\s*s\.t\.:\s*\}|subject\sto:\s*|subj\.to:\s*|s\.t\.:\s*'
-   return t
+   pass
 
 def t_LLBRACE(t):
    r'\\\{'
@@ -550,7 +549,7 @@ t_LCEIL = r'\\lceil'
 t_RCEIL = r'\\rceil'
 t_SIN = r'\\sin'
 t_COS = r'\\cos'
-t_ARCTAN = r'\\arctan'
+t_ARCTAN = r'\\tan\^\{-1\}|\\arctan'
 t_SQRT = r'\\sqrt'
 t_LOG = r'\\log'
 t_LN = r'\\ln'

@@ -26,7 +26,7 @@ var U{c in cities, t in times} >= 0;
 var X{(c1,t1,c2,t2) in schedule} >= 0;
 
 
-minimize obj1: sum{c in cities}U[c,last] + sum{(c1,t1,c2,t2) in schedule : t2 < t1}X[c1,t1,c2,t2];
+minimize obj: sum{c in cities}U[c,last] + sum{(c1,t1,c2,t2) in schedule : t2 < t1}X[c1,t1,c2,t2];
 
 minimize obj2: sum{(c1,t1,c2,t2) in schedule}distance[c1,c2] * X[c1,t1,c2,t2];
 
