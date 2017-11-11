@@ -3,7 +3,7 @@ Latex2MathProg
 
 This tool converts a Linear Programming Model written in LaTeX to a <a href="https://www3.nd.edu/~jeff/mathprog/glpk-4.47/doc/gmpl.pdf" target="_mathProgTutorial">MathProg</a> code.
 
-A MathProg code describes either a Linear Program or a System of Linear Equations. It can be solved using the <a href="https://www.gnu.org/software/glpk/" target="_glpk">GLPK (GNU Linear Programming Kit)</a>. Besides, the GLPK package offers commands/methods to convert a MathProg code to the following formats: <b>CPLEX LP</b>, <b>MPS fixed</b>, <b>MPS free</b> and <b>GLPK</b>.
+A MathProg code describes either a Linear Program or a System of Linear Equations and Inequations. It can be solved using the package <a href="https://www.gnu.org/software/glpk/" target="_glpk">GLPK (GNU Linear Programming Kit)</a>. The GLPK package also offers commands/methods to convert a MathProg code to the following formats: <b>CPLEX LP</b>, <b>MPS fixed</b>, <b>MPS free</b> and <b>GLPK</b>.
 
 Check <a href='https://latex2mathprog.herokuapp.com' target='_blank'>https://latex2mathprog.herokuapp.com</a> to see <b>latex2mathprog</b> working.
 
@@ -71,15 +71,15 @@ param B :=;
 end;
 ```
 
-The Inference Mechanism is used to define if an identifier is a set, parameter or variable. This mechanism is explained in the <b>Inference Mechanism</b> section below.
+The Inference Mechanism is used to define if an identifier is a set, parameter or variable. This mechanism is explained in the <b>Inference Mechanism</b> section.
 
 
-> In the rest of this article, it is used terms that are not fully explained here, like Indexing Expression, Numeric Expression and others. Please, refer to <a href="https://www3.nd.edu/~jeff/mathprog/glpk-4.47/doc/gmpl.pdf" target="_mathProgTutorial">Modeling Language GNU MathProg</a> to see their meanings.
+> In the remaining of this article you will see terms, like Indexing Expression, Numeric Expression and others, that are not fully explained here. Please, refer to <a href="https://www3.nd.edu/~jeff/mathprog/glpk-4.47/doc/gmpl.pdf" target="_mathProgTutorial">Modeling Language GNU MathProg</a> to see their meanings.
 
 
-# Objectives section
+# Objective Statements
 
-A Linear Program written in LaTex code can have one or more objectives. The <b>Objectives</b> section corresponds to the first statements, where each statement must begin with `\text{maximize}` or `\text{minimize}`. The first objective statement is the main objective in a MathProg code, i.e., it is the one to be optmized, the others are secundaries.
+A Linear Program written in LaTex code can have one or more objectives. A <b>Objective</b> statement must begin with one of the following: `\text{maximize}`, `\text{maximize:}`, `maximize`, `maximize:`, `\text{minimize}`, `\text{minimize:}`, `minimize` or `minimize:`. In a MathProg code, the first objective statement is the main objective, i.e., it is the one to be optimized, the others are secondaries.
 
 For instance, <b>latex2mathprog</b> converts
 
@@ -93,23 +93,21 @@ to
 minimize obj: sum{i in I, j in J}C[i,j] * x[i,j];
 ```
 
-A more formal definition of the Objective Statement is given in <b>Statements and Expressions</b> section.
+Formal definition of the Objective statement is given in <b>Statements and Expressions</b> section.
 
 
-# Constraints and Declarations section
+# Constraint and Declaration Statements
 
-The <b>Constraints and Declarations</b> section must start with `\text{subject to}`. It must have at least one Constraint or one Declaration, up to many of both, interchangeably.
+<b>Constraint</b> and <b>Declaration</b> statements are defined formally in <b>Statements and Expressions</b> section.
 
-If the LaTeX code is a <b>System of Linear Equations</b>, then `\text{subject to}` must not be used, because it is used only to separate the <b>Objectives</b> section from the <b>Constraints and Declarations</b> section.
-
-For instance, <b>latex2mathprog</b> converts
+As an example, 
 
 ```latex
-\text{subject to} \sum_{j \in J}x_{i,j} \leq A_{i}: i \in I\\
+\sum_{j \in J}x_{i,j} \leq A_{i}: i \in I\\
 \sum_{i \in I}x_{i,j} \geq B_{j}: j \in J\\
 ```
 
-to 
+is converted to
 
 ```ampl
 s.t. C1 {i in I} :
@@ -119,7 +117,7 @@ s.t. C2 {j in J} :
 	sum{i in I}x[i,j], >= B[j];
 ```
 
-## Constraints
+## Constraint Statements
 
 The LaTex code below illustrates how Constraints can be expressed
 
@@ -150,9 +148,9 @@ s.t. C5 {i in I} :
 	C[i], = 1;
 ```
 
-## Declarations
+## Declaration Statements
 
-Declarations are used to define the attributes of an identifier. For instance
+Declarations are used to declare the attributes of an identifier. For instance
 
 ```latex
 m, n \in \mathbb{Z}, \in \mathbb{P}, > 0; J := 1 \ldots n; M := 1 \ldots m\\
@@ -170,7 +168,7 @@ set J, := 1..n;
 set M, := 1..m;
 ```
 
-Note that Declarations inside a statement can be separated by `;`. Each Declaration can have its own Indexing Expression. For those declarations separated by `;` within a statement, the last Indexing Expression is used to infer the domains of identifiers that do not have its own Indexing Expression declared. For instance, consider the example below
+Note that Declarations inside a statement can be separated by `;`. Each Declaration can have its own Indexing Expression. For declarations separated by `;`, the last Indexing Expression is used to infer the domains of identifiers that do not have its own Indexing Expression declared. For instance, consider the example below
 
 ```latex
 x_{i} \in \mathbb{Z}; A_{i} \text{default} 0: i \in I
@@ -186,17 +184,18 @@ var x{i in I} integer;
 
 Here, the Indexing Expression `i in I` is used for the identifiers `A` and `x`.
 
-Note also the expression `\in \mathbb{P}`. It defines the identifiers `m` and `n` as parameters. When there is no such attribute (and at most cases it is indeed not necessary), <b>latex2mathprog</b> uses its Inference Mechanism to define what an identifier is: set, parameter or variable.
+Note also the expression `\in \mathbb{P}`. It defines the identifiers `m` and `n` as parameters. When it is not explicitly defined (and at most cases it is indeed not necessary), <b>latex2mathprog</b> uses its Inference Mechanism to define the type of an identifier: set, parameter or variable.
 
-More formal definitions of <b>Constraint Statement</b> and <b>Declaration Statement</b> are given in <b>Statements and Expressions</b> section. The attributes that can be defined for an identifier are given in <b>Declaration Attributes</b> section.
+The attributes that can be defined for an identifier are given in <b>Declaration Attributes</b> section.
+
 
 # Variables, Parameters and Sets
 
-A variable must be member of one of the following sets: `\mathbb{B}` or `\{0,1\}` for binary numbers, `\mathbb{R}` or `\mathbb{R}^{+}` for real numbers, `\mathbb{Z}` or `\mathbb{Z}^{+}` for integer numbers and `\mathbb{N}` for natural numbers. Additionally, a variable can be defined by making an identifier member of one of the following sets: `\mathbb{V}`, `\mathbb{Var}`, `\mathbb{Vars}`, `\mathbb{Variable}` or `\mathbb{Variables}`. Ex.: `x \in \mathbb{V}`.
+A variable must be member of one of the following sets: `\mathbb{B}` or `\{0,1\}` for binary numbers, `\mathbb{R}` or `\mathbb{R}^{+}` for real numbers, `\mathbb{Z}` or `\mathbb{Z}^{+}` for integer numbers and `\mathbb{N}` for natural numbers. Additionally, to define an identifier as a variable you can make this identifier member of one of the following sets: `\mathbb{V}`, `\mathbb{Var}`, `\mathbb{Vars}`, `\mathbb{Variable}` or `\mathbb{Variables}`. Ex.: `x \in \mathbb{V}`.
 
-A parameter can be defined by making an identifier member of one of the following sets: `\mathbb{P}`, `\mathbb{Param}`, `\mathbb{Params}`, `\mathbb{Parameter}` and `\mathbb{Parameters}`. Ex.: `D \in \mathbb{P}`. At most cases, the Inference Mechanism is capable of defining correctly that an identifier is a parameter. This explicit definition is useful when defining that a parameter is an integer, natural or real number, like in `P \in \mathbb{Z}`. In this example, the rules in previous paragraph are applied and `P` is considered a variable, unless explicitly stated that it is a parameter, for instance `P \in \mathbb{Z}, P \in \mathbb{Param}`.
+To define an identifier as a parameter you can make this identifier member of one of the following sets: `\mathbb{P}`, `\mathbb{Param}`, `\mathbb{Params}`, `\mathbb{Parameter}` and `\mathbb{Parameters}`. Ex.: `D \in \mathbb{P}`. At most cases, the Inference Mechanism is capable of correctly inferring the identifiers that are parameters. This explicit definition is useful when you want to declare that a parameter is an integer, natural or real number, like in `P \in \mathbb{Z}`. In this example, the rule in previous paragraph is applied and `P` is considered a variable, unless explicitly stated that it is a parameter. For instance, `P \in \mathbb{Z}, P \in \mathbb{Param}`.
  
-A set can be defined by making an identifier member of one of the following sets: `\mathbb{Set}` and `\mathbb{Sets}`. Ex.: `A \in \mathbb{Set}`. At most cases, the Inference Mechanism is capable of defining correctly that an identifier is a set.
+To define an identifier as a set you can make this identifier member of one of the following sets: `\mathbb{Set}` and `\mathbb{Sets}`. Ex.: `A \in \mathbb{Set}`. At most cases, the Inference Mechanism is capable of correctly inferring the identifiers that are sets.
 
 
 A Symbolic Parameter is used for parameters that are Symbolic Expressions. For instance, strings. It must be member of `\mathbb{S}`. Ex.: `sym \in \mathbb{S}`.
@@ -234,7 +233,7 @@ If `L` was not of the type `param logical`, the second line in the MathProg code
 
 # Notation
 
-> Any lexer inside a `\text{ }` can have several whitespaces between the braces, to the left or to the right of the word. For instance, `\text{default}` can also be `\text{ default }`, `\text{ default}`, `\text{default }`, and so on.
+> Any word inside a `\text{ }` can have several whitespaces between the braces, to the left or to the right of the word. For instance, `\text{default}` can also be `\text{ default }`, `\text{ default}`, `\text{default }`, and so on.
 
 ## Identifiers
 
@@ -251,7 +250,7 @@ is converted to
 param _id1, := "test";
 ```
 
-Note that `_` alone is not allowed in an identifier, because `_` is used in LaTeX to format text. Therefore, if you need an identifier with underline(s) you must write each one as `\_`.
+Note that `_` alone is not allowed in an identifier, because `_` is used in LaTeX to format text. Therefore, if you need an identifier with underscore(s) you must write each underscore as `\_`.
 
 
 ## Numbers
@@ -276,14 +275,15 @@ s.t. C1  : -Infinity, <= x, <= Infinity;
 | string concatenator   | `\&` | `"Hello, " \& 'wold!'` |
 
 
-## Reserved Words
+## Reserved Words and Tokens
 
 | | | | |
 |---------|--------|--------|-----------|
 | `card`  | `length` | `round` | `trunc` |
 | `substr` | `time2str` | `str2time` | `gmtime` |
 | `Irand224` | `Uniform01` | `Uniform` | `Normal01` |
-| `Normal` |  |  |  |
+| `Normal` | `maximize` | `maximize:` | `minimize` |
+| `minimize:` | | | |
 
 
 ## Arithmetic Notation
@@ -431,9 +431,9 @@ var x{(i,j) in E};
 `%` is the line comment delimiter. However, `%` has no effect as a comment delimiter when inside a string, like in `"%"`, or inside a `\text`, like in `\text{%}`.
 
 
-## Ignored Lexers
+## Ignored Tokens
 
-The following LaTeX environments and lexers can be used to format the Linear Programming Model. They are ignored by the compiler.
+The following LaTeX environments and tokens can be used to format the Linear Programming Model. They are ignored by the compiler.
 
 | | | | |
 |---------|--------|--------|-----------|
@@ -441,6 +441,9 @@ The following LaTeX environments and lexers can be used to format the Linear Pro
 | `\begin{split}` | `\end{split}` | `\displaystyle` | `\quad` |
 | `\limits` | `\mathclap` | `\text{ }` | `&` |
 | `\n` | `\t` | `\r` | `\\` |
+| `\text{subject to}` | `\text{subject to:}` | `\text{subj.to}` | `\text{subj.to:}` |
+| `\text{s.t.}` | `\text{s.t.:}` | `subject to` | `subject to:` |
+| `subj.to` | `subj.to:` | `s.t.` | `s.t.:` |
 
 
 # Statements and Expressions
@@ -465,11 +468,6 @@ or
 A Linear Program can have more than one objective.
 
 
-## Constraints and Declarations Statements
-
-`\text{subject to}` \<Constraint \|\| Declaration\> [\<Constraint \|\| Declaration\> ... ]
-
-
 ## Constraint Statement
 
 \<ConstraintExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`//`]
@@ -477,10 +475,10 @@ A Linear Program can have more than one objective.
 
 ## Declaration Statement
 
-\<DeclarationExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`;` Declaration] [`//`]
+\<DeclarationExpression\> [`SEPARATOR` \<IndexingExpression\> ] [`;` \<DeclarationExpression\> [`SEPARATOR` \<IndexingExpression\> ] ...] [`//`]
 
 
-## Conditional Statement
+## Conditional Expression
 
 `(` \<LogicalExpression\> `)?` \<Expression when LogicalExpression is True\> `:` \<Expression when LogicalExpression is False\>
 
@@ -615,7 +613,7 @@ The inference of the type of an identifier (Variable, Parameter or Set) is done 
 
 - Parameters: identifier `id` is inferred as a parameter when it is not inferred neither as a variable nor as a set, and also it is not an index. Furthermore, if an identifier `id` is defined as symbolic `id \in \mathbb{S}` or logical `id \in \mathbb{L}`, then it is as a parameter, because only a parameter can be symbolic or logical. When `id` is in an expression of the form `i \in 1 \dots id`, then `id` must be a parameter, even if there are other expressions where `id` would be considered a set, like `id1 \in id` or `id1 \in \{P,id\}`.
 
-### Some minor flaws (to be corrected)
+### Some minor flaws (to be fixed)
 
 There is a minor flaw in the inference mechanism that makes it define a set as a parameter. It occurs in Declaration statements when a set is defined with another set as its default or initial value, but the mechanism does not know yet that the default or assigned value is a set. For instance, consider the following LaTex code.
 
