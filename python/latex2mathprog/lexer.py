@@ -493,15 +493,15 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 
 def t_MAXIMIZE(t):
-   r'\\text\{\s*maximize\s*\}|maximize|\\text\{\s*maximize:\s*\}|maximize:'
+   r'\\text\{\s*maximize:\s*\}|maximize\:|\\text\{\s*maximize\s*\}|maximize'
    return t
 
 def t_MINIMIZE(t):
-   r'\\text\{\s*minimize\s*\}|minimize|\\text\{\s*minimize:\s*\}|minimize:'
+   r'\\text\{\s*minimize:\s*\}|minimize:|\\text\{\s*minimize\s*\}|minimize'
    return t
 
 def t_ignore_SUBJECTTO(t):
-   r'\\text\{\s*subject\sto\s*\}|\\text\{\s*subj\.to\s*\}|\\text\{\s*s\.t\.\s*\}|subject\sto\s*|subj\.to\s*|s\.t\.\s*|\\text\{\s*subject\sto:\s*\}|\\text\{\s*subj\.to:\s*\}|\\text\{\s*s\.t\.:\s*\}|subject\sto:\s*|subj\.to:\s*|s\.t\.:\s*'
+   r'\\text\{\s*subject\sto:\s*\}|\\text\{\s*subj\.to:\s*\}|\\text\{\s*s\.t\.:\s*\}|subject\sto:\s*|subj\.to:\s*|s\.t\.:\s*|\\text\{\s*subject\sto\s*\}|\\text\{\s*subj\.to\s*\}|\\text\{\s*s\.t\.\s*\}|subject\sto\s*|subj\.to\s*|s\.t\.\s*'
    pass
 
 def t_LLBRACE(t):
