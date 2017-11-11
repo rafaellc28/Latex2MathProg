@@ -179,6 +179,15 @@ class CodeGenerator:
         name = domain.getName()
         return name in [Constants.VARIABLES, Constants.PARAMETERS, Constants.SETS]
 
+    def _domainIsAttribute(self, domain):
+        name = domain.getName()
+        return name == Constants.BINARY or name.replace(" ", "") == Constants.BINARY_0_1 or \
+               name.startswith(Constants.INTEGER) or name.startswith(Constants.REALSET) or \
+               name.startswith(Constants.SYMBOLIC) or name.startswith(Constants.LOGICAL)
+
+    def _domainIsInvalid(self, domain):
+        return self._domainIsParamSetOrVar(domain) or self._domainIsAttribute(domain)
+
     def _getItemDomain(self, domains, totalIndices):
         size = len(domains)
         if size == 0:
@@ -188,7 +197,7 @@ class CodeGenerator:
             size -= 1
             domain = domains[size]
 
-            if self._domainIsParamSetOrVar(domain):
+            if self._domainIsInvalid(domain):
                 continue
 
             dependencies = list(domain.getDependencies())
