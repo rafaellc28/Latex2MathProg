@@ -4,6 +4,7 @@
 
 from Number import *
 from String import *
+
 import sys
 import re
 from SyntaxException import *
@@ -602,6 +603,14 @@ def t_ignore_MATHCLAP(t):
 def t_ignore_TEXT(t):
     r'\\text\{\s*\}|\\text'
     pass
+
+def t_ignored_LEFT(t):
+   r'\\left'
+   pass
+
+def t_ignored_RIGHT(t):
+   r'\\right'
+   pass
 
 t_COMMA = r','
 

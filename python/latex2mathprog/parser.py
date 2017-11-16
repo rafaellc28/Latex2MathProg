@@ -4,7 +4,6 @@ import sys
 import re
 
 from lexer import tokens
-import ply.yacc as yacc
 
 from Main import *
 from LinearProgram import *
@@ -30,6 +29,8 @@ from ID import *
 from SyntaxException import *
 from Declarations import *
 from DeclarationExpression import *
+
+import objects as obj
 
 precedence = (
     ('left', 'ID'),
@@ -1539,6 +1540,6 @@ def p_TupleList(t):
 
 def p_error(t):
   if t:
-    raise SyntaxException(t.lineno, t.lexpos, t.value)
+    raise SyntaxException(t.lineno, t.lexpos, t.value, t)
   else:
     raise SyntaxException("EOF")
