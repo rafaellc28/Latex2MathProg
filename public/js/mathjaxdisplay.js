@@ -109,10 +109,7 @@ var initMathjaxDisplay = function () {
 		var keyTeX = getConstraintKey();
 		addConstraint(keyTeX, TeX);
 
-		$("#subjectiveMathInput ol").html(mountConstraintsInput());
-		$("#subjMathInput").val("");
-
-		UpdateSubjectiveMathOutput(mountConstraintsOutput());
+		mountConstraints();
 
 		$("div.MathJax_Display").css("text-align", "left");
 
@@ -243,7 +240,17 @@ var initMathjaxDisplay = function () {
 	    
 	    EDITING = key;
 	}
-
+	
+	window.mountConstraints = function() {
+		$("#subjectiveMathInput ol").html(mountConstraintsInput());
+		$("#subjMathInput").val("");
+		
+		UpdateSubjectiveMathOutput(mountConstraintsOutput());
+		
+	    $("#icon-add-constraint").show();
+	    $("#icon-update-constraint").hide();
+	}
+	
 	window.updateConstraintMath = function(event) {
 		event.preventDefault();
 		
@@ -252,14 +259,7 @@ var initMathjaxDisplay = function () {
 		if (!TeX || !TeX.trim()) { return; }
 
 		updateConstraint(EDITING, TeX);
-
-		$("#subjectiveMathInput ol").html(mountConstraintsInput());
-		$("#subjMathInput").val("");
-		
-		UpdateSubjectiveMathOutput(mountConstraintsOutput());
-		
-	    $("#icon-add-constraint").show();
-	    $("#icon-update-constraint").hide();
+		mountConstraints();
 	    
 	    EDITING = null;
 	}
@@ -323,7 +323,7 @@ var initMathjaxDisplay = function () {
 				success: function(result, status) {
 					updateMathProgEditor(result);
 				},
-				error: function() {
+				error: function(event, jqxhr, settings, thrownError) {
 					alert(dictionary["ERROR_REQUEST"])
 				},
 				complete: function() {
@@ -359,7 +359,7 @@ var initMathjaxDisplay = function () {
 				success: function(result, status) {
 					updateMathProgEditor(result);
 				},
-				error: function() {
+				error: function(event, jqxhr, settings, thrownError) {
 					alert(dictionary["ERROR_REQUEST"])
 				},
 				complete: function() {
