@@ -240,7 +240,7 @@ var initMathjaxDisplay = function () {
 	    
 	    EDITING = key;
 	}
-	
+
 	window.mountConstraints = function() {
 		$("#subjectiveMathInput ol").html(mountConstraintsInput());
 		$("#subjMathInput").val("");
@@ -250,7 +250,7 @@ var initMathjaxDisplay = function () {
 	    $("#icon-add-constraint").show();
 	    $("#icon-update-constraint").hide();
 	}
-	
+
 	window.updateConstraintMath = function(event) {
 		event.preventDefault();
 		
@@ -323,7 +323,7 @@ var initMathjaxDisplay = function () {
 				success: function(result, status) {
 					updateMathProgEditor(result);
 				},
-				error: function(event, jqxhr, settings, thrownError) {
+				error: function(jqxhr, exception, thrownError) {
 					alert(dictionary["ERROR_REQUEST"])
 				},
 				complete: function() {
@@ -359,7 +359,7 @@ var initMathjaxDisplay = function () {
 				success: function(result, status) {
 					updateMathProgEditor(result);
 				},
-				error: function(event, jqxhr, settings, thrownError) {
+				error: function(jqxhr, exception, thrownError) {
 					alert(dictionary["ERROR_REQUEST"])
 				},
 				complete: function() {
