@@ -575,13 +575,21 @@ or
 
 \<Identifier\> `\geq` \<Expression\>
 
-are considered constraints. If you want these to be declarations, they must be written as 
+or
+
+\<Identifier\> `=` \<Expression\>
+
+are parsed as constraints, thus generating constraints to your model. If you want these to be declarations, they must be written as 
 
 \<Identifier\>`, \leq` \<Expression\>
 
 or
 
 \<Identifier\>`, \geq` \<Expression\>.
+
+or
+
+\<Identifier\>`, =` \<Expression\>.
 
 
 # Inference Mechanism
