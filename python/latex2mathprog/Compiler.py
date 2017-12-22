@@ -27,7 +27,7 @@ class Compiler:
 	def compile(self, doc):
 
 		res = ""
-		doc = re.sub(',\s*\\\\\\\\', ', ', doc)
+		#doc = re.sub(',\s*\\\\\\\\', ', ', doc)
 		lines = doc.split("\n")
 		result = None
 		parsing = True
@@ -115,7 +115,7 @@ class Compiler:
 					res += "Invalid indexing expression at statement %d: '%s'. %s.\nContext: %s." % (msg[0], msg[1], msg[2], line)
 
 				except:
-					res += "Error while generating AMPL code. Please, check your Latex code!"
+					res += "Error while generating MathProg code. Please, check your Latex code!"
 
 			else:
 				if self.DEBUG:

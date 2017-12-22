@@ -71,12 +71,15 @@ class Identifier(Expression):
         """
 
         return [self]
-    
+        
     def getSymbol(self):
         return self
-
+        
     def getSymbolName(self, codeGenerator):
         return self.generateCodeWithoutIndices(codeGenerator)
+
+    def getSymbolNameWithIndices(self, codeGenerator):
+        return self.generateCode(codeGenerator)
 
     def addSet(self, inSet):
         self.inSets += [inSet]

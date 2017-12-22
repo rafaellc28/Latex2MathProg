@@ -9,7 +9,7 @@ class Number(Expression):
         """
         Set the number
         
-        :param number: float
+        :param number: float|Infinity
         """
         Expression.__init__(self)
 
@@ -26,27 +26,31 @@ class Number(Expression):
         """
         length method
         """
-
         return 1
 
     def __iter__(self):
         """
         Get the iterator of the class
         """
-
         return [self]
+
+    def lessThanZero(self):
+        return self.number[0] == "-"
+
+    def getNumber(self):
+        return self.number
 
     def getDependencies(self, codeGenerator):
         return []
-    
+        
     def setupEnvironment(self, codeSetup):
         """
         Setup environment
         """
         codeSetup.setupEnvironment(self)
-    
+        
     def generateCode(self, codeGenerator):
         """
-        Generate the MathProg code for this Number
+        Generate the AMPL code for this Number
         """
         return codeGenerator.generateCode(self)

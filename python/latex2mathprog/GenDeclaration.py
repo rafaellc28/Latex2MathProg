@@ -1,18 +1,22 @@
 from GenObj import *
 
 class GenDeclaration(GenObj):
-	def __init__(self, name, attributeList = None, indexingExpression = None, subIndices = [], stmtIndex = None):
+	def __init__(self, name, attributeList = None, indexingExpression = {}, subIndices = {}, stmtIndex = None):
 		super(GenDeclaration, self).__init__(name)
 		self.attributeList = attributeList
-		self.indexingExpression = indexingExpression
 		self.stmtIndex = stmtIndex
 
 		# python bug
 		if not subIndices or len(subIndices) == 0:
-			self.subIndices = []
+			self.subIndices = {}
 		else:
 			self.subIndices = subIndices
-	
+
+		if not indexingExpression or len(indexingExpression) == 0:
+			self.indexingExpression = {}
+		else:
+			self.indexingExpression = indexingExpression
+		
 	def getStmtIndex(self):
 		return self.stmtIndex
 	
@@ -24,7 +28,12 @@ class GenDeclaration(GenObj):
 	
 	def setSubIndices(self, subIndices):
 		self.subIndices = subIndices
-	
+
+	def addSubIndices(self, subIndices):
+		keys = subIndices.keys()
+		for stmtIndex in keys:
+			self.subIndices[stmtIndex] = subIndices[stmtIndex]
+		
 	def getAttributeList(self):
 		return self.attributeList
 		
@@ -46,6 +55,11 @@ class GenDeclaration(GenObj):
 	def setIndexingExpression(self, indexingExpression):
 		self.indexingExpression = indexingExpression
 
+	def addIndexingExpression(self, indexingExpression):
+		keys = indexingExpression.keys()
+		for stmtIndex in keys:
+			self.indexingExpression[stmtIndex] = indexingExpression[stmtIndex]
+			
 	def getByOp(self, op):
 		return filter(lambda el: el.op == op, self.attributeList)
 

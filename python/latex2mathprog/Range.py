@@ -28,7 +28,16 @@ class Range(Expression):
         res += "]"
         
         return res
-    
+        
+    def getRangeInit(self):
+        return self.rangeInit
+        
+    def getRangeEnd(self):
+        return self.rangeEnd
+        
+    def getBy(self):
+        return self.by
+        
     def getDependencies(self, codeGenerator):
         dep = self.rangeInit.getDependencies(codeGenerator) + self.rangeEnd.getDependencies(codeGenerator)
 
