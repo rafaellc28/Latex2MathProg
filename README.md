@@ -731,7 +731,7 @@ s.t. C1 {i in I, j in J1} :
 
 Here, the root scope contains the identifiers `x`, `j`, `J1`, `B`, `i` and `I`.
 
-> It is important to state that <b>latex2mathprog</b> does not perform semantic analysis. A MathProg solver will throw an error to the above code because the definition of index `j` is duplicated inside the constraint `C1`.
+> It is important to state that <b>latex2mathprog</b> does not perform type checking nor duplicate identifier checking in the semantic analysis phase. A MathProg solver will throw an error to the above code because the definition of index `j` is duplicated inside the constraint `C1`.
 
 
 ### Domains 
