@@ -267,6 +267,28 @@ is converted to
 s.t. C1  : -Infinity, <= x, <= Infinity;
 ```
 
+## Fractional Expressions
+
+Fractional Expressions can be expressed as 
+
+`\frac{` \<Numerator\> `}{` \<Denominator\> `}`,
+
+where \<Numerator\> and \<Denominator\> are \<NumericExpression\> or \<Identifier\>. For instance, 
+
+```latex
+a := \frac{b+1}{c-1}
+```
+
+is converted to
+
+```ampl
+param c;
+param b;
+
+param a, := (b + 1)/(c - 1);
+```
+
+
 ## Strings
 
 | Math      | Latex   | Example   |
@@ -444,6 +466,7 @@ The following LaTeX environments and tokens can be used to format the Linear Pro
 | `\text{subject to}` | `\text{subject to:}` | `\text{subj.to}` | `\text{subj.to:}` |
 | `\text{s.t.}` | `\text{s.t.:}` | `subject to` | `subject to:` |
 | `subj.to` | `subj.to:` | `s.t.` | `s.t.:` |
+| `\left`  | `\right` | | |
 
 
 # Statements and Expressions
