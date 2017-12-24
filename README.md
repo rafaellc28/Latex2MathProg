@@ -359,7 +359,7 @@ param a, := (b + 1)/(c - 1);
 | Set | `\mathbb{Set}` or `\mathbb{Sets}` | `a \in \mathbb{Set}` |
 | Symbolic Parameter | `\mathbb{S}` | `a \in \mathbb{S}` |
 | Logical Parameter | `\mathbb{L}` | `a \in \mathbb{L}` |
-| Empty Set    | `\{\}`   | `A \text{ default } \{\}` |
+| Empty Set    | `\{\}` or `\emptyset` or `\varnothing` | `A \text{ default } \{\}` |
 | is member of | `\in` | `a \in \mathbb{B}` |
 | is not member of | `\notin` | `a \notin \mathbb{B}` |
 | is (proper) subset of | `\subset` or `\subseteq` | `A \subseteq B` |
@@ -703,7 +703,7 @@ set SAFE, := PETS;
 
 ### Scopes
 
-The inference mechanism considers each statement as a different scope. There is no global scope. Each statement has a root scope that contains its Indexing Expression (when an Indexing Expression is declared). Besides, other expressions that create scopes inside a statement are: Iterated Expressions (`\sum`, `\prod`, `\max` and `\min`), expressions between parenthesis, `\forall` and `\exists`, both blocks of a conditional ternary expression `(condition)? block1:block2` (each block creates one scope). Each scope (except the root scope) points to a parent scope that contains it. 
+The inference mechanism considers each statement as a different scope. There is no global scope. Each statement has a root scope that contains its Indexing Expression (when an Indexing Expression is declared). Besides, other expressions that create scopes inside a statement are: Iterated Numeric Expressions (`\sum`, `\prod`, `\max` and `\min`), Iterated Set Expressions (`\text{setof}`), expressions between parenthesis, `\forall` and `\exists`, both blocks of a conditional ternary expression `(condition)? block1:block2` (each block creates one scope). Each scope (except the root scope) points to a parent scope that contains it. 
 
 The root scope has higher priority. If the identifier is not resolved in the root scope of a statement, then the search is continued from each leaf scope (scopes that do not have another scope pointing to it) up to the root scope, from the last leaf scope inside a statement until the first one. It is necessary to walk from leaf to root scope because some indices can be defined in diferent scopes through the path. For instance, consider the following constraint written in LaTex
 
