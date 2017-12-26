@@ -1,5 +1,6 @@
 {
 	"LATEX2MATHPROG": "Latex2MathProg",
+	"DESCRIPTION": "Latex2MathProg converts a Linear Programming Model written in LaTeX to a <a href='doc/gmpl.pdf' target='_mathProgTutorial'>MathProg</a> code.<br/><br/>A MathProg code describes either a Linear Program or a System of Linear Equations and Inequations. It can be solved using the package <a href='https://www.gnu.org/software/glpk/' target='_glpk'>GLPK (GNU Linear Programming Kit)</a>. The GLPK package also offers commands/methods to convert a MathProg code to the following formats: <b>CPLEX LP</b>, <b>MPS fixed</b>, <b>MPS free</b> and <b>GLPK</b>.",
 	"LATEX_CODE": "Latex Code", 
 	"MATHJAX_PREVIEW": "MathJax Preview", 
 	"MATHPROG_CODE": "MathProg Code", 
@@ -29,7 +30,7 @@
 	"TIP7": "A <b>Set</b> can be defined by making it member of one of the following sets: $\\mathbb{Set}$ and $\\mathbb{Sets}$.",
 	"TIP8": "A <b>Symbolic Parameter</b> must be member of $\\mathbb{S}$.",
 	"TIP9": "A <b>Logical Parameter</b> must be member of $\\mathbb{L}$.",
-	"TIP10": "The MathProg code can be solved by pressing the 'Solve MathProg' button. In this tool, it is solved  (data section must to be filled) using the <a href='https://github.com/hgourvest/glpk.js' target='_glpk_js'>glpk.js</a> library, which is an implementation in javascript of the <a href='https://www.gnu.org/software/glpk/' target='_glpk_tool'>GLPK (GNU Linear Programming Kit)</a>. Besides, the GLPK package offers commands/methods to convert a MathProg code to the following formats: <b>CPLEX LP</b>, <b>MPS fixed</b>, <b>MPS free</b> and <b>GLPK</b>.",
+	"TIP10": "The MathProg code can be solved by pressing the 'Solve MathProg' button. In this tool, it is solved  (data section must to be filled) using the <a href='https://github.com/hgourvest/glpk.js' target='_glpk_js'>glpk.js</a> library, which is an implementation in javascript of the <a href='https://www.gnu.org/software/glpk/' target='_glpk_tool'>GLPK (GNU Linear Programming Kit)</a>.",
 	"GITHUB_SOURCE": "GitHub: <a href='https://github.com/rafaellc28/Latex2MathProg' target='_github'>https://github.com/rafaellc28/Latex2MathProg</a>",
 	"EXAMPLES": "Examples",
 	"COPY_DATA_SECTION": "Copy to Data Section in MathProg Code",

@@ -1,5 +1,6 @@
 {
 	"LATEX2MATHPROG": "Latex2MathProg",
+	"DESCRIPTION": "Latex2MathProg converte um Modelo de Programação Linear escrito em LaTeX para um código <a href='doc/gmpl.pdf' target='_mathProgTutorial'>MathProg</a>.<br/><br/>Um código MathProg descreve um Programa Linear ou um Sistema de Equações e Inequações Lineares. Ele pode ser resolvido usando o pacote <a href='https://www.gnu.org/software/glpk/' target='_glpk'>GLPK (GNU Linear Programming Kit)</a>. Este pacote também oferece comandos/métodos para converter um código MathProg para os seguintes formatos: <b>CPLEX LP</b>, <b>MPS fixed</b>, <b>MPS free</b> e <b>GLPK</b>.",
 	"LATEX_CODE": "Código Latex", 
 	"MATHJAX_PREVIEW": "Pré-visualização do MathJax", 
 	"MATHPROG_CODE": "Código MathProg", 
@@ -29,7 +30,7 @@
 	"TIP7": "Um <b>Conjunto</b> pode ser definido atribuindo-o a um dos seguintes conjuntos: $\\mathbb{Set}$ e $\\mathbb{Sets}$.",
 	"TIP8": "Um <b>Parâmetro Simbólico</b> deve pertencer a $\\mathbb{S}$.",
 	"TIP9": "Um <b>Parâmetro Lógico</b> deve pertencer a $\\mathbb{L}$.",
-	"TIP10": "O código MathProg pode ser resolvido clicando no botão 'Resolve MathProg'. Nesta ferramenta, ele é resolvido  (a seção data precisa ser preenchida) usando a biblioteca <a href='https://github.com/hgourvest/glpk.js' target='_glpk_js'>glpk.js</a>, que é uma implementação em javascript do <a href='https://www.gnu.org/software/glpk/' target='_glpk_tool'>GLPK (GNU Linear Programming Kit).</a>. Além disso, o pacote GLPK oferece comandos/métodos para converter um código MathProg para os seguintes formatos: <b>CPLEX LP</b>, <b>MPS fixed</b>, <b>MPS free</b> e <b>GLPK</b>.",
+	"TIP10": "O código MathProg pode ser resolvido clicando-se no botão 'Resolve MathProg' (a seção data precisa ser preenchida). Para isso, esse site utiliza a biblioteca <a href='https://github.com/hgourvest/glpk.js' target='_glpk_js'>glpk.js</a>, que é uma implementação em javascript do <a href='https://www.gnu.org/software/glpk/' target='_glpk_tool'>GLPK (GNU Linear Programming Kit).</a>.",
 	"GITHUB_SOURCE": "GitHub: <a href='https://github.com/rafaellc28/Latex2MathProg' target='_github'>https://github.com/rafaellc28/Latex2MathProg</a>",
 	"EXAMPLES": "Exemplos",
 	"COPY_DATA_SECTION": "Copie para a Seção Data no Código MathProg",
