@@ -42,6 +42,12 @@ def check_test_num(num, with_declarations = False):
 
 	check_test(name1, name2)
 
+def check_test_extras_num(num):
+	name1 = 'latex2mathprog/test/samples/extras/test'+str(num)+'.tex.equation'
+	name2 = 'latex2mathprog/test/samples/extras/output/test'+str(num)+'.tex.mod'
+
+	check_test(name1, name2)
+
 def test_lp0():
 	check_test_num(0)
 
@@ -494,3 +500,28 @@ def test_lp75_with_declarations():
 
 def test_lp76_with_declarations():
 	check_test_num(76, True)
+
+
+def test_extras_test1():
+	check_test_extras_num(1)
+
+def test_extras_test2():
+	check_test_extras_num(2)
+
+def test_extras_test3():
+	check_test_extras_num(3)
+
+def test_extras_test4():
+	check_test_extras_num(4)
+
+def test_extras_test5():
+	check_test_extras_num(5)
+
+def test_extras_test6():
+	check_test_extras_num(6)
+
+def test_extras_test7():
+	check_test_extras_num(7)
+
+def test_extras_test8():
+	check_test_extras_num(8)
