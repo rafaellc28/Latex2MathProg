@@ -125,6 +125,10 @@ class CodeSetup:
         self.stmtIndex += 1
         self.currentTable = None
 
+    # Get the MathProg code for a given declaration
+    def _setupDeclaration(self, declaration):
+        declaration.setupEnvironment(self)
+
     # Get the MathProg code for a given constraint
     def _setupConstraint(self, constraint):
         self.level = 0
@@ -467,7 +471,7 @@ class CodeSetup:
 
     def setupEnvironment_FractionalNumericExpression(self, node):
         """
-        Generate the AMPL code for the identifiers and sets used in this numeric expression
+        Generate the MathProg code for the identifiers and sets used in this numeric expression
         """
         node.numerator.setupEnvironment(self)
         node.denominator.setupEnvironment(self)
@@ -1132,6 +1136,7 @@ class CodeSetup:
         """
 
         if node.getIndice() > -1:
+            node.isInt = True
             if len(node.sub_indices) == 0:
                 return
         
