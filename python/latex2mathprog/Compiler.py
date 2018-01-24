@@ -27,7 +27,6 @@ class Compiler:
 	def compile(self, doc):
 
 		res = ""
-		#doc = re.sub(',\s*\\\\\\\\', ', ', doc)
 		lines = doc.split("\n")
 		result = None
 		parsing = True
@@ -46,6 +45,7 @@ class Compiler:
 			try:
 				result = parser.parse(doc, debug=self.log)
 			except SyntaxException as msg:
+				
 				stack = parser.symstack # stack of the parser when the error was thrown
 				
 				for i in range(len(stack)-1, 0, -1):

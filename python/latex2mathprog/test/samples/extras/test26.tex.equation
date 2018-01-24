@@ -1,0 +1,2 @@
+% Test logical expression with forall between several parenthesis and 'and'
+a_{i} < 2: i \in I | ((((\forall \{j \in 1...10\} D[j] > i))) \land 1 \neq 2)

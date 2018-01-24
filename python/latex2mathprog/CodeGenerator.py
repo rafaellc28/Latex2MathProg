@@ -787,6 +787,7 @@ class CodeGenerator:
 
                 prop = t.getProperties()
                 domains = prop.getDomains()
+                domains.reverse()
 
                 for domain in domains:
                     inserted = False
@@ -1543,6 +1544,7 @@ class CodeGenerator:
         first = True
 
         for i in range(len(node.entriesLogicalExpression)):
+
             conj, code = self._getCodeEntryByKey(node.entriesLogicalExpression[i])
 
             if code != 0:

@@ -19,22 +19,22 @@ import re
 from SyntaxException import *
 
 reserved = {
-   'card' : 'CARD',
-   'length' : 'LENGTH',
-   'round' : 'ROUND',
-   'trunc' : 'TRUNC',
-   'substr' : 'SUBSTR',
-   'time2str': 'TIME2STR', 
-   'str2time': 'STR2TIME', 
-   'gmtime' : 'GMTIME',
-   'Irand224': 'IRAND224',
-   'Uniform01': 'UNIFORM01',
-   'Normal01': 'NORMAL01',
-   'Uniform': 'UNIFORM',
-   'Normal': 'NORMAL'
 }
 
 tokens = [
+   'CARD',
+   'LENGTH',
+   'ROUND',
+   'TRUNC',
+   'SUBSTR',
+   'TIME2STR', 
+   'STR2TIME', 
+   'GMTIME',
+   'IRAND224',
+   'UNIFORM01',
+   'NORMAL01',
+   'UNIFORM',
+   'NORMAL',
    'OR',
    'AND',
    'NOT',
@@ -42,7 +42,6 @@ tokens = [
    'NFORALL',
    'EXISTS',
    'NEXISTS',
-   'QUESTION_MARK',
    'EMPTYSET',
    'INTEGERSET',
    'INTEGERSETPOSITIVE',
@@ -130,7 +129,10 @@ tokens = [
    'SETS',
    'VARIABLES',
    'SLASHES',
-   'INFINITY'
+   'INFINITY',
+   'IF',
+   'THEN',
+   'ELSE'
 ] + list(reserved.values())
 
 def _getBound(num, exp):
@@ -147,6 +149,78 @@ def _getOp(op):
       op = "<="
 
    return op
+
+# Define a rule so we can track line numbers
+def t_newline(t):
+   r'\n+'
+   t.lexer.lineno += len(t.value)
+
+# A string containing ignored characters (spaces and tabs)
+t_ignore  = ' \t\r'
+
+def t_CARD(t):
+   r'\\text\{\s*card\s*\}|\s*card(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_LENGTH(t):
+   r'\\text\{\s*length\s*\}|\s*length(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_ROUND(t):
+   r'\\text\{\s*round\s*\}|\s*round(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_TRUNC(t):
+   r'\\text\{\s*trunc\s*\}|\s*trunc(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_SUBSTR(t):
+   r'\\text\{\s*substr\s*\}|\s*substr(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_TIME2STR(t):
+   r'\\text\{\s*time2str\s*\}|\s*time2str(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_STR2TIME(t):
+   r'\\text\{\s*str2time\s*\}|\s*str2time(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_GMTIME(t):
+   r'\\text\{\s*gmtime\s*\}|\s*gmtime(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_IRAND224(t):
+   r'\\text\{\s*Irand224\s*\}|\s*Irand224(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_UNIFORM01(t):
+   r'\\text\{\s*Uniform01\s*\}|\s*Uniform01(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_NORMAL01(t):
+   r'\\text\{\s*Normal01\s*\}|\s*Normal01(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_UNIFORM(t):
+   r'\\text\{\s*Uniform\s*\}|\s*Uniform(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_NORMAL(t):
+   r'\\text\{\s*Normal\s*\}|\s*Normal(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_IF(t):
+   r'\\text\{\s*if\s*\}|\s*if(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_THEN(t):
+   r'\\text\{\s*then\s*\}|\s*then(?!\\_|[a-zA-Z0-9])'
+   return t
+
+def t_ELSE(t):
+   r'\\text\{\s*else\s*\}|\s*else(?!\\_|[a-zA-Z0-9])'
+   return t
 
 def t_ASSIGN(t):
    r':='
@@ -191,11 +265,11 @@ def t_MOD(t):
    return t
 
 def t_BY(t):
-   r'\\text\{\s*by\s*\}'
+   r'\\text\{\s*by\s*\}|\s*by(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_QUOTIENT(t):
-   r'\\big/|\\text\{\s*div\s*\}'
+   r'\\big/|\\text\{\s*div\s*\}|\s*div(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_TIMES(t):
@@ -207,27 +281,27 @@ def t_DIVIDE(t):
    return t
 
 def t_LESS(t):
-   r'\\text\{\s*less\s*\}'
+   r'\\text\{\s*less\s*\}|\s*less(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_FOR(t):
-   r'\\text\{\s*[fF][oO][rR]\s*\}'
+   r'\\text\{\s*for\s*\}|\s*for(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_WHERE(t):
-   r'\\text\{\s*[wW][hH][eE][rR][eE]\s*\}'
+   r'\\text\{\s*where\s*\}|\s*where(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_OR(t):
-   r'\\lor|\\vee|\\text\{\s*or\s*\}'
+   r'\\lor|\\vee|\\text\{\s*or\s*\}|\s*or(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_AND(t):
-   r'\\land|\\wedge|\\text\{\s*and\s*\}'
+   r'\\land|\\wedge|\\text\{\s*and\s*\}|\s*and(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_NOT(t):
-   r'\\neg|!|\\text\{\s*not\s*}'
+   r'\\neg|!|\\text\{\s*not\s*}|\s*not(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_FORALL(t):
@@ -251,15 +325,15 @@ def t_FRAC(t):
    return t
 
 def t_DEFAULT(t):
-   r'\\text\{\s*default\s*\}'
+   r'\\text\{\s*default\s*\}|\s*default(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_DIMEN(t):
-   r'\\text\{\s*dimen\s*\}'
+   r'\\text\{\s*dimen\s*\}|\s*dimen(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_SETOF(t):
-   r'\\text\{\s*setof\s*\}'
+   r'\\text\{\s*setof\s*\}|\s*setof(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_PARAMETERS(t):
@@ -448,15 +522,15 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 
 def t_MAXIMIZE(t):
-   r'\\text\{\s*maximize:\s*\}|maximize:|\\text\{\s*maximize\s*\}|maximize'
+   r'\\text\{\s*maximize\s*:\s*\}|\s*maximize\s*:|\\text\{\s*maximize\s*\}|\s*maximize(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_MINIMIZE(t):
-   r'\\text\{\s*minimize:\s*\}|minimize:|\\text\{\s*minimize\s*\}|minimize'
+   r'\\text\{\s*minimize:\s*\}|\s*minimize\s*:|\\text\{\s*minimize\s*\}|\s*minimize(?!\\_|[a-zA-Z0-9])'
    return t
 
 def t_ignore_SUBJECTTO(t):
-   r'\\text\{\s*subject\sto:\s*\}|\\text\{\s*subj\.to:\s*\}|\\text\{\s*s\.t\.:\s*\}|subject\sto:\s*|subj\.to:\s*|s\.t\.:\s*|\\text\{\s*subject\sto\s*\}|\\text\{\s*subj\.to\s*\}|\\text\{\s*s\.t\.\s*\}|subject\sto\s*|subj\.to\s*|s\.t\.\s*'
+   r'\\text\{\s*subject\sto\s*:\s*\}|\\text\{\s*subj\s*\.\s*to\s*:\s*\}|\\text\{\s*s\s*\.\s*t\.\s*:\s*\}|\s*subject\sto\s*:|\s*subj\s*\.\s*to\s*:|\s*s\s*\.\s*t\s*\.\s*:|\\text\{\s*subject\sto\s*\}|\\text\{\s*subj\s*\.\s*to\s*\}|\\text\{\s*s\s*\.\s*t\s*\.\s*\}|\s*subject\sto(?!\\_|[a-zA-Z0-9])|\s*subj\s*\.\s*to(?!\\_|[a-zA-Z0-9])|\s*s\s*\.\s*t\s*\.(?!\\_|[a-zA-Z0-9])'
    pass
 
 def t_LLBRACE(t):
@@ -483,7 +557,6 @@ def t_RBRACKET(t):
    r'\]|\\\]'
    return t
 
-t_QUESTION_MARK = r'\?'
 t_EQ = r'='
 t_NEQ = r'\\neq'
 t_LE = r'\\leq'
@@ -554,10 +627,6 @@ def t_ignore_MATHCLAP(t):
    r'\\mathclap'
    pass
 
-def t_ignore_TEXT(t):
-    r'\\text\{\s*\}|\\text'
-    pass
-
 def t_ignored_LEFT(t):
    r'\\left'
    pass
@@ -616,8 +685,14 @@ def t_CROSS(t):
    return t
 
 def t_ID(t):
-   r'(\\_)*[a-zA-Z]((\\_)*[a-zA-Z0-9]*)*'
+   r'\\text\{\s*(\\_)*[a-zA-Z]((\\_)*[a-zA-Z0-9]*)*\s*\}|(\\_)*[a-zA-Z]((\\_)*[a-zA-Z0-9]*)*'
    t.type = reserved.get(t.value, 'ID') # Check for reserved words
+
+   m = re.search(r"\\text\{\s*(.+)\s*\}", t.value)
+
+   if m:
+      t.value = m.groups(0)[0]
+
    return t
 
 # A regular expression rule with some action code
@@ -626,13 +701,9 @@ def t_NUMBER(t):
    t.value = Number(t.value)
    return t
 
-# Define a rule so we can track line numbers
-def t_newline(t):
-   r'\n+'
-   t.lexer.lineno += len(t.value)
-
-# A string containing ignored characters (spaces and tabs)
-t_ignore  = ' \t'
+def t_ignore_TEXT(t):
+    r'\\text\{\s*\}|\\text'
+    pass
 
 # Error handling rule
 def t_error(t):
