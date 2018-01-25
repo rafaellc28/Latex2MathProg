@@ -252,6 +252,18 @@ param _id1, := "test";
 
 Note that `_` alone is not allowed in an identifier, because `_` is used in LaTeX to format text. Therefore, if you need an identifier with underscore(s) you must write each underscore as `\_`.
 
+An Identifier inside a `\text` is also an Identifier. For instance
+
+```latex
+\text{a} := \text{\_for}
+```
+
+is converted to
+
+```ampl
+param _for;
+param a, := _for;
+```
 
 ## Numbers
 
@@ -299,13 +311,18 @@ param a, := (b + 1)/(c - 1);
 
 ## Reserved Words and Tokens
 
+All reserved words can also be written inside a `\text`. For instance, both `for` and `\text{for}` are recognized as the token FOR.
+
 | | | | |
 |---------|--------|--------|-----------|
 | `card`  | `length` | `round` | `trunc` |
 | `substr` | `time2str` | `str2time` | `gmtime` |
 | `Irand224` | `Uniform01` | `Uniform` | `Normal01` |
 | `Normal` | `maximize` | `maximize:` | `minimize` |
-| `minimize:` | | | |
+| `minimize:` | `if` | `then` | `else` | 
+| `by` | `div` | `less` | `for` | 
+| `where` | `or` | `and` | `default` | 
+| `dimen` | `setof` |  | |
 
 
 ## Arithmetic Notation
