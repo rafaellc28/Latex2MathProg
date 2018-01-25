@@ -12,22 +12,25 @@ class NumericExpressionWithFunction(NumericExpression):
     Class representing a numeric expression with function node in the AST of a MLP
     """
 
-    ABS       = "abs"
-    ATAN      = "atan"
     CARD      = "card"
+    ABS       = "abs"
     CEIL      = "ceil"
-    COS       = "cos"
     FLOOR     = "floor"
-    EXP       = "exp"
-    LENGTH    = "length"
-    LOG       = "log"
-    LOG10     = "log10"
     ROUND     = "round"
-    SIN       = "sin"
-    SQRT      = "sqrt"
     TRUNC     = "trunc"
+    LENGTH    = "length"
     MIN       = "min"
     MAX       = "max"
+    EXP       = "exp"
+    LOG       = "log"
+    LOG10     = "log10"
+    SQRT      = "sqrt"
+
+    SIN       = "sin"
+    COS       = "cos"
+    TAN      = "tan"
+    ATAN      = "atan"
+    
     STR2TIME  = "str2time"
     GMTIME    = "gmtime"
     UNIFORM01 = "Uniform01"
@@ -40,7 +43,7 @@ class NumericExpressionWithFunction(NumericExpression):
         """
         Set the numeric expression and the function
 
-        :param function           : (abs | atan | card | ceil | cos | floor | exp | length | log | log10 | round | sin | sqrt | trunc | gmtime | ...)
+        :param function           : (abs | tan | atan | card | ceil | cos | floor | exp | length | log | log10 | round | sin | sqrt | trunc | gmtime | ...)
         :param numericExpression  : NumericExpression | SymbolicExpression | ValueList
         :param numericExpression2 : NumericExpression | SymbolicExpression
         """

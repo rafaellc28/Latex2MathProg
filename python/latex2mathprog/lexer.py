@@ -88,7 +88,8 @@ tokens = [
    'RCEIL',
    'SIN',
    'COS',
-   'ARCTAN',
+   'TAN',
+   'ATAN',
    'SQRT',
    'LOG',
    'LN',
@@ -577,7 +578,8 @@ t_LCEIL = r'\\lceil'
 t_RCEIL = r'\\rceil'
 t_SIN = r'\\sin'
 t_COS = r'\\cos'
-t_ARCTAN = r'\\tan\^\{-1\}|\\arctan'
+t_ATAN = r'\\tan\^\{-1\}|\\arctan'
+t_TAN = r'\\tan'
 t_SQRT = r'\\sqrt'
 t_LOG = r'\\log'
 t_LN = r'\\ln'
@@ -653,15 +655,6 @@ def t_ignore_AMP(t):
 
 def t_ignore_BACKSLASHES(t):
    r'\\\\'
-   pass
-
-def t_ignore_N(t):
-   r'\n'
-   t.lexer.lineno += 1
-   pass
-
-def t_ignore_R(t):
-   r'\r'
    pass
 
 def t_DIFF(t):

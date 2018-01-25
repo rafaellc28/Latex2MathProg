@@ -59,7 +59,7 @@ precedence = (
     ('left', 'TIMES', 'DIVIDE', 'MOD', 'QUOTIENT'),
     ('left', 'UPLUS', 'UMINUS'),
     ('right', 'CARET'),
-    ('left', 'LFLOOR', 'RFLOOR', 'LCEIL', 'RCEIL', 'SIN', 'COS', 'ARCTAN', 'SQRT', 'LN', 'LOG', 'EXP'),
+    ('left', 'LFLOOR', 'RFLOOR', 'LCEIL', 'RCEIL', 'SIN', 'COS', 'TAN', 'ATAN', 'SQRT', 'LN', 'LOG', 'EXP'),
     ('left', 'INTEGERSET', 'INTEGERSETPOSITIVE', 'INTEGERSETNEGATIVE', 'INTEGERSETWITHONELIMIT', 'INTEGERSETWITHTWOLIMITS', 
       'REALSET', 'REALSETPOSITIVE', 'REALSETNEGATIVE', 'REALSETWITHONELIMIT', 'REALSETWITHTWOLIMITS', 
       'NATURALSET', 'NATURALSETWITHONELIMIT', 'NATURALSETWITHTWOLIMITS', 'BINARYSET', 'SYMBOLIC', 'LOGICAL')
@@ -1150,6 +1150,16 @@ def p_FunctionNumericExpression(t):
                          
                          | COS LPAREN Identifier RPAREN
                          | COS LPAREN NumericSymbolicExpression RPAREN
+
+                         | TAN LPAREN Identifier RPAREN
+                         | TAN LPAREN NumericSymbolicExpression RPAREN
+                         
+                         | ATAN LPAREN Identifier COMMA Identifier RPAREN
+                         | ATAN LPAREN Identifier COMMA NumericSymbolicExpression RPAREN
+                         | ATAN LPAREN NumericSymbolicExpression COMMA Identifier RPAREN
+                         | ATAN LPAREN NumericSymbolicExpression COMMA NumericSymbolicExpression RPAREN
+                         | ATAN LPAREN Identifier RPAREN
+                         | ATAN LPAREN NumericSymbolicExpression RPAREN
                          
                          | LOG LPAREN Identifier RPAREN
                          | LOG LPAREN NumericSymbolicExpression RPAREN
@@ -1160,15 +1170,8 @@ def p_FunctionNumericExpression(t):
                          | EXP LPAREN Identifier RPAREN
                          | EXP LPAREN NumericSymbolicExpression RPAREN
                          
-                         | ARCTAN LPAREN Identifier COMMA Identifier RPAREN
-                         | ARCTAN LPAREN Identifier COMMA NumericSymbolicExpression RPAREN
-                         | ARCTAN LPAREN NumericSymbolicExpression COMMA Identifier RPAREN
-                         | ARCTAN LPAREN NumericSymbolicExpression COMMA NumericSymbolicExpression RPAREN
-                         | ARCTAN LPAREN Identifier RPAREN
-                         | ARCTAN LPAREN NumericSymbolicExpression RPAREN
-                         
-                         | CARD LPAREN Identifier RPAREN
                          | CARD LPAREN SetExpression RPAREN
+                         | CARD LPAREN Identifier RPAREN
                          
                          | LENGTH LPAREN Identifier RPAREN
                          | LENGTH LPAREN NumericSymbolicExpression RPAREN
@@ -1259,7 +1262,10 @@ def p_FunctionNumericExpression(t):
     elif _type == "EXP":
         op = NumericExpressionWithFunction.EXP
 
-    elif _type == "ARCTAN":
+    elif _type == "TAN":
+        op = NumericExpressionWithFunction.TAN
+
+    elif _type == "ATAN":
         op = NumericExpressionWithFunction.ATAN
 
     elif _type == "UNIFORM01":
