@@ -311,6 +311,8 @@ param a, := (b + 1)/(c - 1);
 
 ## Reserved Words and Tokens
 
+All reserved words can also be written inside a `\text`. For instance, both `for` and `\text{for}` are recognized as the token FOR.
+
 | | | | |
 |---------|--------|--------|-----------|
 | `card`  | `length` | `round` | `trunc` |
