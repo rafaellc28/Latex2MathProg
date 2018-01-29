@@ -349,6 +349,7 @@ All reserved words can also be written inside a `\text`. For instance, both `for
 | not exists  | `\nexists` or `\not\exists` | `\nexists \{i \in I\} z[i]` |
 | for all    | `\forall` | `\forall \{u \in unit\} u \in mPos` |
 | not for all  | `\not\forall` | `\not\forall \{u \in unit\} u \in mPos` |
+| if-then-else  | `if` or `\text{if}`, `then` or `\text{then}`, and `else` or `\text{else}` | `if a then b else c` |
 
 
 ## Relation Notation
@@ -520,7 +521,7 @@ A Linear Program can have more than one objective.
 
 ## Conditional Expression
 
-`(` \<LogicalExpression\> `)?` \<Expression when LogicalExpression is True\> `:` \<Expression when LogicalExpression is False\>
+`if ` \<LogicalExpression\> ` then ` \<Expression when LogicalExpression is True\> [` else ` \<Expression when LogicalExpression is False\>]
 
 
 ## Constraint Expression
