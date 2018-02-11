@@ -245,7 +245,8 @@ class CodeGenerator:
         return isinstance(obj, ParameterSet) or isinstance(obj, SetSet) or isinstance(obj, VariableSet)
 
     def _isNumberSet(self, obj):
-        return isinstance(obj, BinarySet) or isinstance(obj, IntegerSet) or isinstance(obj, RealSet)
+        return isinstance(obj, BinarySet) or isinstance(obj, IntegerSet) or isinstance(obj, RealSet) or \
+              (isinstance(obj, SetExpression) and obj.getSymbolName(self).replace(" ", "") == Constants.BINARY_0_1)
 
     def _isModifierSet(self, obj):
         return isinstance(obj, SymbolicSet) or isinstance(obj, LogicalSet)
@@ -1041,6 +1042,14 @@ class CodeGenerator:
                             if attr != None:
                                 varStr += ", >= " + attr.attribute.generateCode(self)
 
+                        ins_vec = varDecl.getIn()
+                        ins_vec = self._removePreDefinedTypes(map(lambda el: self._getSetAttribute(el.attribute), ins_vec))
+                        if ins_vec != None and len(ins_vec) > 0:
+                            ins = ", ".join(map(lambda el: "in " + el.generateCode(self), ins_vec))
+
+                            if ins != "":
+                                varStr += ", " + ins
+
                     varStr += ";\n\n"
 
         return varStr
@@ -1414,7 +1423,7 @@ class CodeGenerator:
         if isinstance(node.numerator, ValuedNumericExpression):
             numerator = numerator.value
             
-        if not isinstance(numerator, Identifier) and not isinstance(numerator, Number):
+        if not isinstance(numerator, Identifier) and not isinstance(numerator, Number) and not isinstance(numerator, NumericExpressionWithFunction):
             numerator = "("+numerator.generateCode(self)+")"
         else:
             numerator = numerator.generateCode(self)
@@ -1423,7 +1432,7 @@ class CodeGenerator:
         if isinstance(denominator, ValuedNumericExpression):
             denominator = denominator.value
             
-        if not isinstance(denominator, Identifier) and not isinstance(denominator, Number):
+        if not isinstance(denominator, Identifier) and not isinstance(denominator, Number) and not isinstance(denominator, NumericExpressionWithFunction):
             denominator = "("+denominator.generateCode(self)+")"
         else:
             denominator = denominator.generateCode(self)

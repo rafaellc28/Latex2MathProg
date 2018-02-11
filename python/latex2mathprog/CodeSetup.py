@@ -1431,11 +1431,24 @@ class CodeSetup:
                 (isinstance(name, str) and self.codeGenerator.genSets.has(name))
              ) and not identifier.isParam:
 
-            if not self.codeGenerator.genParameters.has(name):
-                self._setIsSet(identifier)
+            if isinstance(name, list):
+                names = name
                 
-                if isinstance(var, Identifier):
-                    self._setIsSet(var)
+                for name in names:
+                    
+                    if not self.codeGenerator.genParameters.has(name):
+                        self._setIsSet(identifier)
+                        
+                        if isinstance(var, Identifier):
+                            self._setIsSet(var)
+                            
+            else:
+                
+                if not self.codeGenerator.genParameters.has(name):
+                    self._setIsSet(identifier)
+                    
+                    if isinstance(var, Identifier):
+                        self._setIsSet(var)
 
     def setupEnvironment_AttributeList(self, node, identifier):
         identifier1 = self._getIdentifier(node.attribute)
