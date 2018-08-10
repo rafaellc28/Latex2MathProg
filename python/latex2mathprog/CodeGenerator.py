@@ -1043,6 +1043,42 @@ class CodeGenerator:
 
         return result
 
+    def _processType(self, _types, dim = None, isSet = False, isVariable = False):
+        result = EMPTY_STRING
+        checkType = True
+
+        if isSet:
+            if dim != None and dim > 1:
+                result += SPACE+DIMENSION+SPACE + str(dim)
+
+        else:
+
+            _types = self._removeTypesThatAreNotDeclarable(_types)
+
+            if not isSet and not isVariable:
+                modifiers = self._getModifiers(_types)
+
+                if len(modifiers) > 0:
+                    _type = modifiers[0].getName()
+
+                    if _type.strip() != EMPTY_STRING:
+                        result += SPACE + _type
+                        checkType = False
+
+            if checkType:
+                
+                _types = self._getTypes(_types)
+
+                if len(_types) > 0:
+                    _type = _types[0].getName()
+                    _type = _type if _type != Constants.BINARY_0_1 else Constants.BINARY
+                    _type = _type if not _type.startswith(Constants.REALSET) else _type[8:]
+
+                    if _type.strip() != EMPTY_STRING:
+                        result += SPACE + _type
+
+        return result
+
     def _declareVars(self):
         """
         Generate the MathProg code for the declaration of identifiers
@@ -1071,16 +1107,7 @@ class CodeGenerator:
 
         result += self._processDomain(declaration, name, domain, dependencies_vec, sub_indices_vec, minVal, maxVal, stmtIndex)
 
-        _types = self._removeTypesThatAreNotDeclarable(_types)
-        _types = self._getTypes(_types)
-
-        if len(_types) > 0:
-            _type = _types[0].getName()
-            _type = _type if _type != Constants.BINARY_0_1 else Constants.BINARY
-            _type = _type if not _type.startswith(Constants.REALSET) else _type[8:]
-
-            if _type.strip() != EMPTY_STRING:
-                result += SPACE + _type
+        result += self._processType(_types, None, False, True)
 
         result += self._processDeclaration(name, declaration, False, False)
 
@@ -1102,25 +1129,7 @@ class CodeGenerator:
 
         result += self._processDomain(declaration, name, domain, dependencies_vec, sub_indices_vec, minVal, maxVal, stmtIndex)
 
-        _types = self._removeTypesThatAreNotDeclarable(_types)
-        modifiers = self._getModifiers(_types)
-
-        if len(modifiers) > 0:
-            _type = modifiers[0].getName()
-
-            if _type.strip() != EMPTY_STRING:
-                result += SPACE + _type
-        else:
-            
-            _types = self._getTypes(_types)
-
-            if len(_types) > 0:
-                _type = _types[0].getName()
-                _type = _type if _type != Constants.BINARY_0_1 else Constants.BINARY
-                _type = _type if not _type.startswith(Constants.REALSET) else _type[8:]
-
-                if _type.strip() != EMPTY_STRING:
-                    result += SPACE + _type
+        result += self._processType(_types, None, False, False)
 
         result += self._processDeclaration(name, declaration, False, False)
 
@@ -1143,8 +1152,7 @@ class CodeGenerator:
 
         result += self._processDomain(declaration, name, domain, dependencies_vec, sub_indices_vec, minVal, maxVal, stmtIndex)
 
-        if dim != None and dim > 1:
-            result += SPACE+DIMENSION+SPACE + str(dim)
+        result += self._processType(_types, dim, True, False)
 
         result += self._processDeclaration(name, declaration, True, False)
 
