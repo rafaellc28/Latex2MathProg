@@ -8,7 +8,7 @@ set E dimen 2, within V cross V;
 
 param a{(i,j) in E}, > 0;
 
-param t symbolic, in V, != s, := n;
+param t symbolic, != s, in V, := n;
 
 
 var flow >= 0;
