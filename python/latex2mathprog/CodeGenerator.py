@@ -1079,6 +1079,28 @@ class CodeGenerator:
 
         return result
 
+    def _processObject(self, genObj, typeObj, isSet, isVariable):
+        result = EMPTY_STRING
+        name = genObj.getName()
+
+        result = EMPTY_STRING
+        result += typeObj+SPACE+name
+
+        declaration = self.genDeclarations.get(name)
+
+        domain, domains_vec, dependencies_vec, sub_indices_vec, stmtIndex = self._getSubIndicesDomainsAndDependencies(name)
+        _types, dim, minVal, maxVal = self._getProperties(name)
+
+        result += self._processDomain(declaration, name, domain, dependencies_vec, sub_indices_vec, minVal, maxVal, stmtIndex)
+
+        result += self._processType(_types, dim, isSet, isVariable)
+
+        result += self._processDeclaration(name, declaration, isSet, isVariable)
+
+        result += END_STATEMENT+BREAKLINE+BREAKLINE
+
+        return result
+
     def _declareVars(self):
         """
         Generate the MathProg code for the declaration of identifiers
@@ -1094,71 +1116,13 @@ class CodeGenerator:
         return result
         
     def _declareVar(self, var):
-        name = var.getName()
-        domain = None
-
-        result = EMPTY_STRING
-        result += VARIABLE+SPACE + name
-        
-        declaration = self.genDeclarations.get(name)
-
-        domain, domains_vec, dependencies_vec, sub_indices_vec, stmtIndex = self._getSubIndicesDomainsAndDependencies(name)
-        _types, dim, minVal, maxVal = self._getProperties(name)
-
-        result += self._processDomain(declaration, name, domain, dependencies_vec, sub_indices_vec, minVal, maxVal, stmtIndex)
-
-        result += self._processType(_types, None, False, True)
-
-        result += self._processDeclaration(name, declaration, False, False)
-
-        result += END_STATEMENT+BREAKLINE+BREAKLINE
-
-        return result
+        return self._processObject(var, VARIABLE, False, True)
 
     def _declareParam(self, _genParameter):
-        name = _genParameter.getName()
-        domain = None
-
-        result = EMPTY_STRING
-        result += PARAMETER+SPACE + name
-
-        declaration = self.genDeclarations.get(name)
-
-        domain, domains_vec, dependencies_vec, sub_indices_vec, stmtIndex = self._getSubIndicesDomainsAndDependencies(name)
-        _types, dim, minVal, maxVal = self._getProperties(name)
-
-        result += self._processDomain(declaration, name, domain, dependencies_vec, sub_indices_vec, minVal, maxVal, stmtIndex)
-
-        result += self._processType(_types, None, False, False)
-
-        result += self._processDeclaration(name, declaration, False, False)
-
-        result += END_STATEMENT+BREAKLINE+BREAKLINE
-
-        return result
+        return self._processObject(_genParameter, PARAMETER, False, False)
 
     def _declareSet(self, _genSet):
-        name = _genSet.getName()
-        domain = None
-        dimen = None
-
-        result = EMPTY_STRING
-        result += SET+SPACE+name
-
-        declaration = self.genDeclarations.get(name)
-
-        domain, domains_vec, dependencies_vec, sub_indices_vec, stmtIndex = self._getSubIndicesDomainsAndDependencies(name)
-        _types, dim, minVal, maxVal = self._getProperties(name)
-
-        result += self._processDomain(declaration, name, domain, dependencies_vec, sub_indices_vec, minVal, maxVal, stmtIndex)
-
-        result += self._processType(_types, dim, True, False)
-
-        result += self._processDeclaration(name, declaration, True, False)
-
-        result += END_STATEMENT+BREAKLINE+BREAKLINE
-
-        return result
+        return self._processObject(_genSet, SET, True, False)
 
     def _declareSetsAndParams(self):
 
