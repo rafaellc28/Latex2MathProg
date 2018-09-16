@@ -8,14 +8,14 @@ window.initExamples = function() {
 		samples = result;
 		for (i in samples.samples) {
 			sample = samples.samples[i];
-			li = "<li><a href='#' onclick='javascript:selectExample("+sample.number+","+sample.decl+")'>"+sample.name+"</a></li>";
+			li = "<li><a href='#' onclick='javascript:selectExample("+sample.number+","+sample.decl+","+sample.ampl+")'>"+sample.name+"</a></li>";
 			$("#examples").append(li);
 		}
 	});
 }
 
-window.selectExample = function(number, decl) {
-	$.getJSON("/samples?number="+number+"&decl="+decl, function(result, status, xhr) {
+window.selectExample = function(number, decl, ampl) {
+	$.getJSON("/samples?number="+number+"&decl="+decl+"&ampl="+ampl, function(result, status, xhr) {
 		if (status == "error" || status == "timeout" || status == "parsererror") {
 			alert("Error recovering sample.");
 			return;

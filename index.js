@@ -62,36 +62,40 @@ app.get('/samples', function(req, res) {
 	if (req.query.number) {
 		var number = req.query.number;
 		var decl = req.query.decl;
+		var ampl = req.query.ampl;
 		result = {}
-
-		var name;
-		if (decl == "true") {
-			name = number + "_with_declarations";
-		} else {
-			name = number;
+		
+		var name = number;
+		
+		if (ampl == "true") {
+			name += "_ampl";
 		}
-
+		
+		if (decl == "true") {
+			name += "_with_declarations";
+		}
+		
 		var sample = baseSamples+"/lp"+name+".tex.equation";
 		var dataSample = baseSamples+"/data/lp"+name+".tex.dat";
-
+		
 		var d = Deferred();
-
+		
 		fs.readFile(sample, "utf8", function(err, data){
 		    if (err) data = "";
 		    result["sample"] = data;
-
+		    
 			fs.readFile(dataSample, "utf8", function(err, data){
 			    if (err) data = "";
 			    result["data"] = data;
-
+			    
 			    d.resolve(result);
 			});
 		});
-
+		
 		q.when(d).done(function(result) {
 			res.send(result);
 		});
-
+		
 	} else {
 		res.send({});
 	}

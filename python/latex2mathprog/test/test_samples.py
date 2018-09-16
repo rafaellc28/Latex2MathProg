@@ -48,6 +48,17 @@ def check_test_extras_num(num):
 
 	check_test(name1, name2)
 
+def check_test_ampl_num(num, with_declarations = False):
+	if with_declarations:
+		name1 = 'latex2mathprog/test/samples/ampl/lp'+str(num)+'_ampl_with_declarations.tex.equation'
+		name2 = 'latex2mathprog/test/samples/ampl/output/lp'+str(num)+'_ampl_with_declarations.tex.mod'
+	else:
+		name1 = 'latex2mathprog/test/samples/ampl/lp'+str(num)+'_ampl.tex.equation'
+		name2 = 'latex2mathprog/test/samples/ampl/output/lp'+str(num)+'_ampl.tex.mod'
+
+	check_test(name1, name2)
+
+
 def test_lp0():
 	check_test_num(0)
 
@@ -669,3 +680,7 @@ def test_extras_test55():
 
 def test_extras_test56():
 	check_test_extras_num(56)
+
+# AMPL samples
+def test_lp0_ampl():
+	check_test_ampl_num(0)
