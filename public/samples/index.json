@@ -85,6 +85,7 @@
 		{"name": "GLPK/sorting.mod (with declaration section)", "number": 72, "decl": true, "ampl": false},
 		{"name": "GLPK/cal.mod (with declaration section)", "number": 73, "decl": true, "ampl": false},
 		{"name": "GLPK/graph.mod (with declaration section)", "number": 74, "decl": true, "ampl": false},
-		{"name": "AMPL/lmodels/blend.mod", "number": 0, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/blend.mod", "number": 0, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/diet.mod", "number": 1, "decl": false, "ampl": true}
 	]
 }

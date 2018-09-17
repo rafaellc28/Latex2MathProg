@@ -684,3 +684,6 @@ def test_extras_test56():
 # AMPL samples
 def test_lp0_ampl():
 	check_test_ampl_num(0)
+
+def test_lp1_ampl():
+	check_test_ampl_num(1)
