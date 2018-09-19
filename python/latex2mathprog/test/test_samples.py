@@ -687,3 +687,6 @@ def test_lp0_ampl():
 
 def test_lp1_ampl():
 	check_test_ampl_num(1)
+
+def test_lp2_ampl():
+	check_test_ampl_num(2)
