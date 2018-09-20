@@ -87,6 +87,7 @@
 		{"name": "GLPK/graph.mod (with declaration section)", "number": 74, "decl": true, "ampl": false},
 		{"name": "AMPL/lmodels/blend.mod", "number": 0, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/diet.mod", "number": 1, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/diet(2).mod", "number": 2, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/diet(2).mod", "number": 2, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/dietu.mod", "number": 3, "decl": false, "ampl": true}
 	]
 }
