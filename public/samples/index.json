@@ -88,6 +88,7 @@
 		{"name": "AMPL/lmodels/blend.mod", "number": 0, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/diet.mod", "number": 1, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/diet(2).mod", "number": 2, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/dietu.mod", "number": 3, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/dietu.mod", "number": 3, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/dietu1.mod", "number": 4, "decl": false, "ampl": true}
 	]
 }
