@@ -95,6 +95,7 @@
 		{"name": "AMPL/lmodels/iorow.mod", "number": 7, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/minmax.mod", "number": 8, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/nltrans.mod", "number": 9, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/nltransb.mod", "number": 10, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/nltransb.mod", "number": 10, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/nltransc.mod", "number": 11, "decl": false, "ampl": true}
 	]
 }

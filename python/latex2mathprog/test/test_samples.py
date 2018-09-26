@@ -714,3 +714,6 @@ def test_lp9_ampl():
 
 def test_lp10_ampl():
 	check_test_ampl_num(10)
+
+def test_lp11_ampl():
+	check_test_ampl_num(11)
