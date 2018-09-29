@@ -99,6 +99,7 @@
 		{"name": "AMPL/lmodels/nltransc.mod", "number": 11, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/nltransd.mod", "number": 12, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/pgon.mod", "number": 13, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/p2gon.mod", "number": 14, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/p2gon.mod", "number": 14, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/prod.mod", "number": 15, "decl": false, "ampl": true}
 	]
 }
