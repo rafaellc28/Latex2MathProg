@@ -738,3 +738,6 @@ def test_lp17_ampl():
 
 def test_lp18_ampl():
 	check_test_ampl_num(18)
+
+def test_lp19_ampl():
+	check_test_ampl_num(19)
