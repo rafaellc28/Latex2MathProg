@@ -106,6 +106,7 @@
 		{"name": "AMPL/lmodels/steel3.mod", "number": 18, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/steel4.mod", "number": 19, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/steel4r.mod", "number": 20, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/steelP.mod", "number": 21, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/steelP.mod", "number": 21, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/steelp1a.mod", "number": 22, "decl": false, "ampl": true}
 	]
 }
