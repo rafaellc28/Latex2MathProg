@@ -774,3 +774,6 @@ def test_lp29_ampl():
 
 def test_lp31_ampl():
 	check_test_ampl_num(31)
+
+def test_lp32_ampl():
+	check_test_ampl_num(32)
