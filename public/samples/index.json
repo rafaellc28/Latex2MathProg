@@ -116,6 +116,8 @@
 		{"name": "AMPL/lmodels/steelT3.mod", "number": 28, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/transp.mod", "number": 29, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/dist.mod", "number": 31, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/egypt1.mod", "number": 32, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/egypt1.mod", "number": 32, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/egypt2.mod", "number": 33, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/mod8.mod", "number": 34, "decl": false, "ampl": true}
 	]
 }
