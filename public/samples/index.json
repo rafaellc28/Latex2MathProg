@@ -119,6 +119,7 @@
 		{"name": "AMPL/lmodels/egypt1.mod", "number": 32, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/egypt2.mod", "number": 33, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/mod8.mod", "number": 34, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/multi.mod", "number": 35, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/multi.mod", "number": 35, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/multimip1.mod", "number": 36, "decl": false, "ampl": true}
 	]
 }
