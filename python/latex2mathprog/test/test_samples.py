@@ -798,3 +798,6 @@ def test_lp38_ampl():
 
 def test_lp39_ampl():
 	check_test_ampl_num(39)
+
+def test_lp40_ampl():
+	check_test_ampl_num(40)
