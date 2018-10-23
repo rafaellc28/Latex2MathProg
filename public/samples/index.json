@@ -124,6 +124,7 @@
 		{"name": "AMPL/lmodels/multimip2.mod", "number": 37, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/multimip3.mod", "number": 38, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/net1.mod", "number": 39, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/net3.mod", "number": 40, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/net3.mod", "number": 40, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/netasgn.mod", "number": 41, "decl": false, "ampl": true}
 	]
 }
