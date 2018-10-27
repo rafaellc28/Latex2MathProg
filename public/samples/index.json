@@ -128,6 +128,7 @@
 		{"name": "AMPL/lmodels/netasgn.mod", "number": 41, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/oil.mod", "number": 42, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/train1.mod", "number": 44, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/train2.mod", "number": 45, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/train2.mod", "number": 45, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/transp2.mod", "number": 46, "decl": false, "ampl": true}
 	]
 }
