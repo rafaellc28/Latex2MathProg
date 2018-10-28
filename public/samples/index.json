@@ -130,6 +130,7 @@
 		{"name": "AMPL/lmodels/train1.mod", "number": 44, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/train2.mod", "number": 45, "decl": false, "ampl": true},
 		{"name": "AMPL/lmodels/transp2.mod", "number": 46, "decl": false, "ampl": true},
-		{"name": "AMPL/lmodels/transp3.mod", "number": 47, "decl": false, "ampl": true}
+		{"name": "AMPL/lmodels/transp3.mod", "number": 47, "decl": false, "ampl": true},
+		{"name": "AMPL/lmodels/transp4.mod", "number": 48, "decl": false, "ampl": true}
 	]
 }
