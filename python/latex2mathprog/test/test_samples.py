@@ -822,3 +822,6 @@ def test_lp47_ampl():
 
 def test_lp48_ampl():
 	check_test_ampl_num(48)
+
+def test_lp49_ampl():
+	check_test_ampl_num(49)
