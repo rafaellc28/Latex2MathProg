@@ -707,10 +707,12 @@ class CodeSetup:
             if isinstance(var, list):
                 for i in range(len(var)):
                     var[i].isSymbolic = True
+                    var[i].isDeclaredAsParam = True
                     self._setIsParam(var[i])
             else:
                 self._setIsParam(var)
                 var.isSymbolic = True
+                var.isDeclaredAsParam = True
 
             self._addType(identifier, setExpressionObj)
 
@@ -718,10 +720,12 @@ class CodeSetup:
             if isinstance(var, list):
                 for i in range(len(var)):
                     var[i].isLogical = True
+                    var[i].isDeclaredAsParam = True
                     self._setIsParam(var[i])
             else:
-                var.isLogical = True
                 self._setIsParam(var)
+                var.isLogical = True
+                var.isDeclaredAsParam = True
 
             self._addType(identifier, setExpressionObj)
 
@@ -1240,7 +1244,7 @@ class CodeSetup:
 
                 self.codeGenerator.genParameters.add(_genParam)
 
-            elif node.isSymbolic or node.isLogical or node.isInt or node.isInteger:
+            if node.isSymbolic or node.isLogical or node.isInt or node.isInteger:
                 _genParam = self.codeGenerator.genParameters.get(self.identifierKey)
                 if _genParam != None:
                     if node.isSymbolic or node.isLogical:
@@ -1496,11 +1500,13 @@ class CodeSetup:
         elif isinstance(setExpressionObj, SymbolicSet):
             self._setIsParam(identifier)
             identifier.isSymbolic = True
+            identifier.isDeclaredAsParam = True
             self._addType(identifier, setExpressionObj)
             
         elif isinstance(setExpressionObj, LogicalSet):
             self._setIsParam(identifier)
             identifier.isLogical = True
+            identifier.isDeclaredAsParam = True
             self._addType(identifier, setExpressionObj)
 
         elif isinstance(setExpressionObj, ParameterSet):
