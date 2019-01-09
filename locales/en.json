@@ -21,7 +21,7 @@
 	"SIMPLE_EXAMPLE": "The example below and the <b>data</b> section that can be used to test its resolution are from <a href='https://www3.nd.edu/~jeff/mathprog/glpk-4.47/doc/gmpl.pdf' target='_mathProgTutorial'><i>Modeling Language GNU MathProg</i></a>, Appendix E.",
 	"DATA_SECTION": "Data section of the example below: ",
 	"DATA_SECTION_DATA": "set I := Seattle &nbsp;&nbsp; San-Diego;</br>set J := New-York &nbsp;&nbsp; Chicago Topeka;</br></br>param A := Seattle &nbsp;&nbsp; 350</br>&nbsp;&nbsp; &nbsp;&nbsp; San-Diego &nbsp;&nbsp; 600;</br></br>param B := New-York &nbsp;&nbsp;325</br>&nbsp;&nbsp; &nbsp;&nbsp; Chicago &nbsp;&nbsp; 300</br>&nbsp;&nbsp; &nbsp;&nbsp; Topeka &nbsp;&nbsp; 275;</br></br>param C : &nbsp;&nbsp; &nbsp;&nbsp; New-York &nbsp;&nbsp; Chicago &nbsp;&nbsp; Topeka := </br> &nbsp;&nbsp; &nbsp;&nbsp; Seattle &nbsp;&nbsp; 0.225 &nbsp;&nbsp; 0.153 &nbsp;&nbsp; 0.162</br> &nbsp;&nbsp; &nbsp;&nbsp; San-Diego &nbsp;&nbsp; 0.225 &nbsp;&nbsp; 0.162 &nbsp;&nbsp; 0.126;</br>",
-	"TIP1": "Use <b>\\text{maximize}</b> or <b>\\text{minimize}</b> to the Objective Function(s) in the <b>Objective section</b> and <b>\\text{subject to}</b> to start the <b>Constraints and Declarations section</b>.",
+	"TIP1": "Use <b>\\text{maximize}</b> or <b>\\text{minimize}</b> to the Objective Function(s)</b>.",
 	"TIP2": "A constraint can not end with COMMA '<b>,</b>', thus '<b>,\\\\</b>' means that the constraint continues in the next line.",
 	"TIP3": "<b>Declarations</b> can be separated by SEMICOLON '<b>;</b>'.",
 	"TIP4": "<b>Variables</b> must be members of one of the following sets: $\\mathbb{B}$ or $\\{0,1\\}$, $\\mathbb{R}$, $\\mathbb{R}^{+}$, $\\mathbb{Z}$, $\\mathbb{Z}^{+}$ and $\\mathbb{N}$.",
